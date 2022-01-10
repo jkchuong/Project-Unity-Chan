@@ -2,7 +2,7 @@
 
 This project is to practice using version control with other teammates in Unity.
 
-It features [Unity-chan](https://assetstore.unity.com/packages/3d/characters/unity-chan-model-18705#description) in a Temple Run/Subway Surfer style gameplay.
+It features [Unity-chan](https://assetstore.unity.com/packages/3d/characters/unity-chan-model-18705) in a Temple Run/Subway Surfer style gameplay.
 
 Key Features:
 
