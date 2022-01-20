@@ -85,7 +85,7 @@ namespace UnityChan
 			velocity = transform.TransformDirection (velocity);
 			//以下のvの閾値は、Mecanim側のトランジションと一緒に調整する
 			if (v > 0.1) {
-				velocity *= forwardSpeed;		// 移動速度を掛ける
+				velocity = new Vector3(forwardSpeed, 0, 0);		// 移動速度を掛ける
 			} else if (v < -0.1) {
 				velocity *= backwardSpeed;	// 移動速度を掛ける
 			}
@@ -104,10 +104,10 @@ namespace UnityChan
 		
 
 			// 上下のキー入力でキャラクターを移動させる
-			transform.localPosition += Vector3.zero * Time.fixedDeltaTime;
+			transform.localPosition += velocity * Time.fixedDeltaTime;
 
 			// 左右のキー入力でキャラクタをY軸で旋回させる
-			transform.Rotate (0, h * 0, 0);	
+			transform.Rotate (0, h * v, 0);	
 	
 
 			// 以下、Animatorの各ステート中での処理
