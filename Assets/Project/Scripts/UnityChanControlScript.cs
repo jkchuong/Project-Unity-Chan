@@ -1,164 +1,157 @@
-﻿
+﻿using System;
 using UnityEngine;
 using System.Collections;
 
 namespace UnityChan
 {
-	[RequireComponent(typeof(Animator))]
-	[RequireComponent(typeof(CapsuleCollider))]
-	[RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(CapsuleCollider))]
+    [RequireComponent(typeof(Rigidbody))]
+    public class UnityChanControlScript : MonoBehaviour
+    {
+        public float animSpeed = 1.5f;
+        public float lookSmoother = 3.0f;
+        public bool useCurves = true;
 
-	public class UnityChanControlScript : MonoBehaviour
-	{
+        public float useCurvesHeight = 0.5f;
 
-		public float animSpeed = 1.5f;				
-		public float lookSmoother = 3.0f;			
-		public bool useCurves = true;				
+        public float forwardSpeed = 7.0f;
 
-		public float useCurvesHeight = 0.5f;	
+        public float backwardSpeed = 0.0f;
 
-		public float forwardSpeed = 7.0f;
+        public float rotateSpeed = 2.0f;
 
-		public float backwardSpeed = 0.0f;
+        public float jumpPower = 3.0f;
 
-		public float rotateSpeed = 2.0f;
+        private CapsuleCollider col;
+        private Rigidbody rb;
+        private Vector3 velocity;
+        private float orgColHight;
+        private Vector3 orgVectColCenter;
+        private Animator anim;
+        private AnimatorStateInfo currentBaseState;
 
-		public float jumpPower = 3.0f; 
+        static int idleState = Animator.StringToHash("Base Layer.Idle");
+        static int locoState = Animator.StringToHash("Base Layer.Locomotion");
+        static int jumpState = Animator.StringToHash("Base Layer.Jump");
+        static int restState = Animator.StringToHash("Base Layer.Rest");
 
-		private CapsuleCollider col;
-		private Rigidbody rb;
-		private Vector3 velocity;
-		private float orgColHight;
-		private Vector3 orgVectColCenter;
-		private Animator anim;							
-		private AnimatorStateInfo currentBaseState;			
+        void Start()
+        {
+            anim = GetComponent<Animator>();
 
-		private GameObject cameraObject;	
+            col = GetComponent<CapsuleCollider>();
+            rb = GetComponent<Rigidbody>();
 
-		static int idleState = Animator.StringToHash ("Base Layer.Idle");
-		static int locoState = Animator.StringToHash ("Base Layer.Locomotion");
-		static int jumpState = Animator.StringToHash ("Base Layer.Jump");
-		static int restState = Animator.StringToHash ("Base Layer.Rest");
+            orgColHight = col.height;
+            orgVectColCenter = col.center;
+        }
 
-		void Start ()
-		{
-			anim = GetComponent<Animator> ();
+        private void Update()
+        {
+            float h = Input.GetAxis("Horizontal");
+            float v = Input.GetAxis("Vertical");
+            anim.SetFloat("Speed", v);
+            anim.SetFloat("Direction", h);
+            anim.speed = animSpeed;
+            currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
+            rb.useGravity = true;
 
-			col = GetComponent<CapsuleCollider> ();
-			rb = GetComponent<Rigidbody> ();
 
-			cameraObject = GameObject.FindWithTag ("MainCamera");
+            velocity = new Vector3(h, 0, 0);
 
-			orgColHight = col.height;
-			orgVectColCenter = col.center;
-		}
-	
+            velocity = transform.TransformDirection(velocity);
 
-		void FixedUpdate ()
-		{
-			float h = Input.GetAxis ("Horizontal");				
-			float v = Input.GetAxis ("Vertical");				
-			anim.SetFloat ("Speed", v);							
-			anim.SetFloat ("Direction", h); 					
-			anim.speed = animSpeed;								
-			currentBaseState = anim.GetCurrentAnimatorStateInfo (0);	
-			rb.useGravity = true;
-		
+            if (h > 0.1)
+            {
+                velocity *= forwardSpeed;
+            }
+            else if (h < -0.1)
+            {
+                velocity *= backwardSpeed;
+            }
 
-			velocity = new Vector3 (h, 0, 0);		
-	
-			velocity = transform.TransformDirection (velocity);
+            if (Input.GetButtonDown("Jump"))
+            {
+                rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+                anim.SetBool("Jump", true);
+            }
+            
+            transform.localPosition += velocity * Time.fixedDeltaTime;
 
-			if (h > 0.1) 
-			{
-				velocity *= forwardSpeed;	
-			} 
-			else if (h < -0.1) 
-			{
-				velocity *= backwardSpeed;	
-			}
-		
-			if (Input.GetButtonDown ("Jump")) 
-			{	
-				rb.AddForce (Vector3.up * jumpPower, ForceMode.Impulse);
-				anim.SetBool ("Jump", true);		
-			}
-		
-			transform.localPosition += velocity * Time.fixedDeltaTime;
+            transform.Rotate(0, h * 0, 0);
+        }
 
-			transform.Rotate (0, h * 0, 0);	
-	
+        void FixedUpdate()
+        {
 
-			if (currentBaseState.nameHash == locoState) {
+            if (currentBaseState.nameHash == locoState)
+            {
+                if (useCurves)
+                {
+                    resetCollider();
+                }
+            }
 
-				if (useCurves) {
-					resetCollider ();
-				}
-			}
+            else if (currentBaseState.nameHash == jumpState)
+            {
+                if (!anim.IsInTransition(0))
+                {
+                    if (useCurves)
+                    {
+                        float jumpHeight = anim.GetFloat("JumpHeight");
+                        float gravityControl = anim.GetFloat("GravityControl");
+                        if (gravityControl > 0)
+                            rb.useGravity = false;
 
-		else if (currentBaseState.nameHash == jumpState) {
-				cameraObject.SendMessage ("setCameraPositionJumpView");
+                        Ray ray = new Ray(transform.position + Vector3.up, -Vector3.up);
+                        RaycastHit hitInfo = new RaycastHit();
 
-				//if (!anim.IsInTransition (0)) {
+                        if (Physics.Raycast(ray, out hitInfo))
+                        {
+                            if (hitInfo.distance > useCurvesHeight)
+                            {
+                                col.height = orgColHight - jumpHeight;
+                                float adjCenterY = orgVectColCenter.y + jumpHeight;
+                                col.center = new Vector3(0, adjCenterY, 0);
+                            }
+                            else
+                            {
+                                resetCollider();
+                            }
+                        }
+                    }
 
-					if (useCurves) {
+                    anim.SetBool("Jump", false);
+                }
+            }
 
-						float jumpHeight = anim.GetFloat ("JumpHeight");
-						float gravityControl = anim.GetFloat ("GravityControl"); 
-						if (gravityControl > 0)
-							rb.useGravity = false;	
-										
-						Ray ray = new Ray (transform.position + Vector3.up, -Vector3.up);
-						RaycastHit hitInfo = new RaycastHit ();
+            else if (currentBaseState.nameHash == idleState)
+            {
+                if (useCurves)
+                {
+                    resetCollider();
+                }
 
-						if (Physics.Raycast (ray, out hitInfo)) {
-							if (hitInfo.distance > useCurvesHeight) {
-								col.height = orgColHight - jumpHeight;			
-								float adjCenterY = orgVectColCenter.y + jumpHeight;
-								col.center = new Vector3 (0, adjCenterY, 0);	
-							} else {				
-								resetCollider ();
-							}
-						}
-					//}
-		
-					anim.SetBool ("Jump", false);
-				}
-			}
+                if (Input.GetButtonDown("Jump"))
+                {
+                    anim.SetBool("Rest", true);
+                }
+            }
 
-		//else if (currentBaseState.nameHash == idleState) {
+            else if (currentBaseState.nameHash == restState)
+            {
+                if (!anim.IsInTransition(0))
+                {
+                    anim.SetBool("Rest", false);
+                }
+            }
+        }
 
-		//		if (useCurves) {
-		//			resetCollider ();
-		//		}
-
-		//		if (Input.GetButtonDown ("Jump")) {
-		//			anim.SetBool ("Rest", true);
-		//		}
-		//	}
-
-		//else if (currentBaseState.nameHash == restState) {
-		//		if (!anim.IsInTransition (0)) {
-		//			anim.SetBool ("Rest", false);
-		//		}
-		//	}
-		}
-
-		void OnGUI ()
-		{
-			//GUI.Box (new Rect (Screen.width - 260, 10, 250, 150), "Interaction");
-			//GUI.Label (new Rect (Screen.width - 245, 30, 250, 30), "Up/Down Arrow : Go Forwald/Go Back");
-			//GUI.Label (new Rect (Screen.width - 245, 50, 250, 30), "Left/Right Arrow : Turn Left/Turn Right");
-			//GUI.Label (new Rect (Screen.width - 245, 70, 250, 30), "Hit Space key while Running : Jump");
-			//GUI.Label (new Rect (Screen.width - 245, 90, 250, 30), "Hit Spase key while Stopping : Rest");
-			//GUI.Label (new Rect (Screen.width - 245, 110, 250, 30), "Left Control : Front Camera");
-			//GUI.Label (new Rect (Screen.width - 245, 130, 250, 30), "Alt : LookAt Camera");
-		}
-
-		void resetCollider ()
-		{
-			col.height = orgColHight;
-			col.center = orgVectColCenter;
-		}
-	}
+        void resetCollider()
+        {
+            col.height = orgColHight;
+            col.center = orgVectColCenter;
+        }
+    }
 }
