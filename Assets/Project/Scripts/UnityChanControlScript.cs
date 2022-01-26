@@ -31,12 +31,15 @@ namespace UnityChan
         private Animator anim;
         private AnimatorStateInfo currentBaseState;
 
+        private float horizontalInput;
+        private float verticalInput;
+
         static int idleState = Animator.StringToHash("Base Layer.Idle");
         static int locoState = Animator.StringToHash("Base Layer.Locomotion");
         static int jumpState = Animator.StringToHash("Base Layer.Jump");
         static int restState = Animator.StringToHash("Base Layer.Rest");
 
-        void Start()
+        private void Start()
         {
             anim = GetComponent<Animator>();
 
@@ -49,41 +52,41 @@ namespace UnityChan
 
         private void Update()
         {
-            float h = Input.GetAxis("Horizontal");
-            float v = Input.GetAxis("Vertical");
-            anim.SetFloat("Speed", v);
-            anim.SetFloat("Direction", h);
+            horizontalInput = Input.GetAxis("Horizontal");
+            verticalInput = Input.GetAxis("Vertical");
+            anim.SetFloat("Speed", verticalInput);
+            anim.SetFloat("Direction", horizontalInput);
             anim.speed = animSpeed;
             currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
             rb.useGravity = true;
-
-
-            velocity = new Vector3(h, 0, 0);
-
-            velocity = transform.TransformDirection(velocity);
-
-            if (h > 0.1)
-            {
-                velocity *= forwardSpeed;
-            }
-            else if (h < -0.1)
-            {
-                velocity *= backwardSpeed;
-            }
 
             if (Input.GetButtonDown("Jump"))
             {
                 rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
                 anim.SetBool("Jump", true);
             }
-            
-            transform.localPosition += velocity * Time.fixedDeltaTime;
-
-            transform.Rotate(0, h * 0, 0);
+           
         }
 
-        void FixedUpdate()
+        private void FixedUpdate()
         {
+            
+            velocity = new Vector3(horizontalInput, 0, 0);
+
+            velocity = transform.TransformDirection(velocity);
+
+            if (horizontalInput > 0.1)
+            {
+                velocity *= forwardSpeed;
+            }
+            else if (horizontalInput < -0.1)
+            {
+                velocity *= backwardSpeed;
+            }
+
+            transform.localPosition += velocity * Time.fixedDeltaTime;
+
+            transform.Rotate(0, horizontalInput * 0, 0);
 
             if (currentBaseState.nameHash == locoState)
             {
