@@ -1,40 +1,70 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace Assets.Project.Scripts.Obstacles
 {
     public class ObstacleManager : MonoBehaviour
     {
         #region Fields
-        [SerializeField] private GameObject[] allObstacles;
+        [SerializeField] private GameObject[] allObstacles; // list of prefabs outside
+        [SerializeField] private float fastestSpawnRate;
+        [SerializeField] private float lowestSpawnRate;
         #endregion
 
         private void Start()
         {
-
+            // init random spawning coroutine
+            fastestSpawnRate = 0.2f;
+            lowestSpawnRate = 1f;
+            StartCoroutine(RandomSpawning(1));            
         }
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow)) SpawnObstacle();
+
+        }
+
+        // random spawn coroutine function that changes the spawn rate every time
+        private IEnumerator RandomSpawning(float spawnInterval)
+        {         
+            yield return new WaitForSeconds(spawnInterval);
+            while (true)
+            {
+                SpawnObstacle();
+
+                Debug.Log($"Spawning every {spawnInterval}s");
+                spawnInterval = Random.Range(fastestSpawnRate, lowestSpawnRate);
+                yield return new WaitForSeconds(spawnInterval);
+            }            
         }
         
         // spawn obstacle
         private void SpawnObstacle()
-        {            
-            var freeObstacle = allObstacles[GetAvailableObstacle()].GetComponent<Obstacle>();
-            freeObstacle.ResetObstacle();
-            freeObstacle.ActivateThis(); 
+        {
+            int refFreeObstacle = -1;
+            if (TryGetAvailableObstacle(out refFreeObstacle))
+            {
+                Debug.Log("Spawning");
+                var freeObstacle = allObstacles[refFreeObstacle].GetComponent<Obstacle>();
+                freeObstacle.ResetObstacle();
+                freeObstacle.ActivateThis();
+            }             
         }
 
         // TODO: refactor into dictionary to reduce the look up from O(n) to O(1)
-        private int GetAvailableObstacle()
+        private bool TryGetAvailableObstacle(out int refAvailableObstacle)
         {
+            refAvailableObstacle = 0;
             for (int i = 0; i < allObstacles.Length; i++)
             {
                 if (!allObstacles[i].activeInHierarchy)
-                    return i;
+                {
+                    refAvailableObstacle = i;
+                    return true;
+                }                    
             }
-            return 0;
+            Debug.LogWarning("No available obstacle to get");
+            return false;
         }
     }
 }
