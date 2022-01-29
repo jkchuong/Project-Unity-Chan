@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
 using UnityEngine;
-using Assets.Project.Scripts.Obstacles;
 
 namespace Assets.Project.Scripts.Obstacles
-{    public class Obstacle : MonoBehaviour
+{
+    public class Obstacle : MonoBehaviour
     {
         #region Fields
         [SerializeField] private Transform obstacleOriginLocation;
@@ -28,10 +25,10 @@ namespace Assets.Project.Scripts.Obstacles
         // Update is called once per frame
         void Update()
         {
-            // on creation then move
+            // obstacle always moving
             Move();
             
-            // when this obstacle is out of life reset it
+            // when out of life reset it
             lifetime += Time.deltaTime;
             if (lifetime > maxLifetime)
             {
@@ -40,7 +37,7 @@ namespace Assets.Project.Scripts.Obstacles
             }
         }
         
-        //Move object at specific direction and speed
+        //  move object at specific direction and speed
         public void Move()
         {
             velocity = direction;
@@ -49,7 +46,7 @@ namespace Assets.Project.Scripts.Obstacles
             transform.localPosition += velocity * Time.deltaTime;
         }
         
-        // set as inactive and reset position
+        // resets this obstacle from a random delta from origin position
         public void ResetObstacle()
         {
             lifetime = 0;

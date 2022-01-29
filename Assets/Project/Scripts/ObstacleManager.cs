@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using Assets.Project.Scripts.Obstacles;
+﻿using UnityEngine;
 
 namespace Assets.Project.Scripts.Obstacles
 {
@@ -16,25 +10,24 @@ namespace Assets.Project.Scripts.Obstacles
 
         private void Start()
         {
-            // sound
-            //_audioSource.Play();
+
         }
 
         private void Update()
         {
-            ManualSpawn();
+            if (Input.GetKeyDown(KeyCode.UpArrow)) SpawnObstacle();
         }
-        private void ManualSpawn()
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                var freeObstacle = allObstacles[GetObstacleFromBag()].GetComponent<Obstacle>();
-                freeObstacle.ResetObstacle();
-                freeObstacle.ActivateThis();                
-            }            
+        
+        // spawn obstacle
+        private void SpawnObstacle()
+        {            
+            var freeObstacle = allObstacles[GetAvailableObstacle()].GetComponent<Obstacle>();
+            freeObstacle.ResetObstacle();
+            freeObstacle.ActivateThis(); 
         }
 
-        private int GetObstacleFromBag()
+        // TODO: refactor into dictionary to reduce the look up from O(n) to O(1)
+        private int GetAvailableObstacle()
         {
             for (int i = 0; i < allObstacles.Length; i++)
             {
