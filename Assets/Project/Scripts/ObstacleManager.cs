@@ -32,7 +32,10 @@ namespace Assets.Project.Scripts.Obstacles
             {
                 SpawnObstacle();
 
-                Debug.Log($"Spawning every {spawnInterval}s");
+                #if UNITY_EDITOR
+                    Debug.Log($"Spawning every {spawnInterval}s");
+                #endif                
+                
                 spawnInterval = Random.Range(fastestSpawnRate, lowestSpawnRate);
                 yield return new WaitForSeconds(spawnInterval);
             }            
@@ -44,7 +47,11 @@ namespace Assets.Project.Scripts.Obstacles
             int refFreeObstacle = -1;
             if (TryGetAvailableObstacle(out refFreeObstacle))
             {
-                Debug.Log("Spawning");
+
+                #if UNITY_EDITOR
+                    Debug.Log("Spawning");
+                #endif
+
                 var freeObstacle = allObstacles[refFreeObstacle].GetComponent<Obstacle>();
                 freeObstacle.ResetObstacle();
                 freeObstacle.ActivateThis();
@@ -63,7 +70,10 @@ namespace Assets.Project.Scripts.Obstacles
                     return true;
                 }                    
             }
-            Debug.LogWarning("No available obstacle to get");
+            #if UNITY_EDITOR
+                Debug.LogWarning("No available obstacle to get");
+            #endif
+
             return false;
         }
     }
