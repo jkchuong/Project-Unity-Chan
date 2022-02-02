@@ -86,7 +86,7 @@ namespace UnityChan
 
             transform.localPosition += velocity * Time.fixedDeltaTime;
 
-            transform.Rotate(0, horizontalInput * 0, 0);
+            transform.Rotate(0, 0, 0);
 
             if (currentBaseState.nameHash == locoState)
             {

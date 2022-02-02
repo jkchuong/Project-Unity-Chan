@@ -13,7 +13,7 @@ namespace Assets.Project.Scripts.Obstacles
 
         private float lifetime;
         private Vector3 velocity;
-        private Vector3 direction = new Vector3(0, 0, -1);
+        // private Vector3 direction = new Vector3(0, 0, -1);
         #endregion
 
         public void ActivateThis() => gameObject.SetActive(true);
@@ -42,7 +42,7 @@ namespace Assets.Project.Scripts.Obstacles
         //  move object at specific direction and speed
         public void Move()
         {
-            velocity = direction;
+            velocity = Vector3.back;
             velocity = transform.TransformDirection(velocity);
             velocity *= obstacleSpeed;
             transform.localPosition += velocity * Time.deltaTime;
