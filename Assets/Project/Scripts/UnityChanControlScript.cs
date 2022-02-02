@@ -32,7 +32,7 @@ namespace UnityChan
         private AnimatorStateInfo currentBaseState;
 
         private float horizontalInput;
-        private float verticalInput;
+        private float verticalInput = 1;
 
         static int idleState = Animator.StringToHash("Base Layer.Idle");
         static int locoState = Animator.StringToHash("Base Layer.Locomotion");
@@ -53,7 +53,7 @@ namespace UnityChan
         private void Update()
         {
             horizontalInput = Input.GetAxis("Horizontal");
-            verticalInput = Input.GetAxis("Vertical");
+            // verticalInput = Input.GetAxis("Vertical");
             anim.SetFloat("Speed", verticalInput);
             anim.SetFloat("Direction", horizontalInput);
             anim.speed = animSpeed;
