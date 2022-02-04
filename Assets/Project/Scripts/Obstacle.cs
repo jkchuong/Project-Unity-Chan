@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Assets.Project.Scripts.Obstacles
 {
@@ -13,7 +15,7 @@ namespace Assets.Project.Scripts.Obstacles
 
         private float lifetime;
         private Vector3 velocity;
-        private Vector3 direction = new Vector3(0, 0, -1);
+        private Vector3 direction;
         #endregion
 
         public void ActivateThis() => gameObject.SetActive(true);
@@ -22,6 +24,11 @@ namespace Assets.Project.Scripts.Obstacles
         private void Awake()
         {
             DeactivateThis();
+        }
+
+        private void Start()
+        {
+            direction = transform.forward * -1;
         }
 
         // Update is called once per frame
@@ -51,7 +58,7 @@ namespace Assets.Project.Scripts.Obstacles
         // resets this obstacle from a random delta from origin position
         public void ResetObstacle()
         {            
-            var randomDeltaPosition = new Vector3(Random.Range(-3f, 3f), Random.Range(0f, 1.0f), Random.Range(0f, 2.0f)); ; //height,sides,towardsYou
+            var randomDeltaPosition = new Vector3(Random.Range(-5f, 5f), Random.Range(0f, 1.0f), Random.Range(0f, 2.0f)); ; //height,sides,towardsYou
             var randomObjSpeed = Random.Range(minObjSpeed, maxObjSpeed);
 
             lifetime = 0;
