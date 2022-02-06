@@ -37,6 +37,7 @@ namespace UnityChan
         private int locoState = Animator.StringToHash("Base Layer.Locomotion");
         private int jumpState = Animator.StringToHash("Base Layer.Jump");
         private int restState = Animator.StringToHash("Base Layer.Rest");
+        private int slideState = Animator.StringToHash("Base Layer.Slide");
 
         Dictionary<int, Action> animationStates;
         #endregion
@@ -56,12 +57,14 @@ namespace UnityChan
             animationStates.Add(locoState, () => WhenRunning());
             animationStates.Add(jumpState, () => WhenJumping());
             animationStates.Add(restState, () => WhenResting());
+            animationStates.Add(slideState, () => WhenSliding());
         }
 
         private void Update()
         {
             SetAnimations();
             JumpControls();
+            SlidingControls();
         }
 
         private void FixedUpdate()
@@ -90,6 +93,13 @@ namespace UnityChan
                 rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
                 anim.SetBool("Jump", true);
             }
+        }        
+        private void SlidingControls()
+        {
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                anim.SetBool("Slide", true);
+            }
         }
         #endregion
 
@@ -107,9 +117,10 @@ namespace UnityChan
         // performs action depending on current state of character
         private void ActionsDependingOnAnimationState(int currentState)
         {            
+            // check that dictionary has that state
             if (animationStates.ContainsKey(currentState))
             {
-                animationStates[currentState](); // call action in dictionary that corresponds to currentState
+                animationStates[currentState](); // invoke action in dictionary that corresponds to currentState
             }
             return;
         }
@@ -176,6 +187,14 @@ namespace UnityChan
             if (!anim.IsInTransition(0))
             {
                 anim.SetBool("Rest", false);
+            }
+        }
+
+        private void WhenSliding()
+        {
+            if (!anim.IsInTransition(0))
+            {
+                anim.SetBool("Slide", false);
             }
         }
         #endregion
