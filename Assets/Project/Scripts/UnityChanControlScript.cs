@@ -38,6 +38,7 @@ namespace UnityChan
         private int jumpState = Animator.StringToHash("Base Layer.Jump");
         private int restState = Animator.StringToHash("Base Layer.Rest");
         private int slideState = Animator.StringToHash("Base Layer.Slide");
+        private int attackState = Animator.StringToHash("Base Layer.Attack");
 
         Dictionary<int, Action> animationStates;
         #endregion
@@ -58,6 +59,7 @@ namespace UnityChan
             animationStates.Add(jumpState, () => WhenJumping());
             animationStates.Add(restState, () => WhenResting());
             animationStates.Add(slideState, () => WhenSliding());
+            animationStates.Add(attackState, () => WhenAttacking());
         }
 
         private void Update()
@@ -65,6 +67,7 @@ namespace UnityChan
             SetAnimations();
             JumpControls();
             SlidingControls();
+            AttackControls();
         }
 
         private void FixedUpdate()
@@ -99,6 +102,13 @@ namespace UnityChan
             if (Input.GetKeyDown(KeyCode.S))
             {
                 anim.SetBool("Slide", true);
+            }
+        }
+        private void AttackControls()
+        {
+            if (Input.GetMouseButtonDown((int)MouseButtonDown.MBD_LEFT))
+            {
+                anim.SetBool("Attack", true);
             }
         }
         #endregion
@@ -195,6 +205,13 @@ namespace UnityChan
             if (!anim.IsInTransition(0))
             {
                 anim.SetBool("Slide", false);
+            }
+        }
+        private void WhenAttacking()
+        {
+            if (!anim.IsInTransition(0))
+            {
+                anim.SetBool("Attack", false);
             }
         }
         #endregion
