@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 122140848}
   m_Layer: 0
-  m_Name: origin
+  m_Name: Obstacle Origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -160,6 +160,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1036728392}
     m_Modifications:
+    - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: maxLifetime
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: speedIncreaseFactor
+      value: 0.004
+      objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: obstacleOriginLocation
       value: 
@@ -226,6 +234,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1036728392}
     m_Modifications:
+    - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: maxLifetime
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: speedIncreaseFactor
+      value: 0.004
+      objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: obstacleOriginLocation
       value: 
@@ -391,6 +407,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 1036728392}
     m_Modifications:
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: maxLifetime
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: speedIncreaseFactor
+      value: 0.004
+      objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: obstacleOriginLocation
       value: 
       objectReference: {fileID: 1036728392}
@@ -466,6 +490,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1036728392}
     m_Modifications:
+    - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: maxLifetime
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: speedIncreaseFactor
+      value: 0.004
+      objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: obstacleOriginLocation
       value: 
@@ -623,6 +655,63 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
+--- !u!1 &788544223
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 788544225}
+  - component: {fileID: 788544224}
+  - component: {fileID: 788544226}
+  m_Layer: 0
+  m_Name: Obstacle Remover
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &788544224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788544223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9c54f54954aee74ca9e1d97d04652a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &788544225
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788544223}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.82, z: -15.73}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &788544226
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788544223}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 15.97, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1036728391
 GameObject:
   m_ObjectHideFlags: 0
@@ -672,6 +761,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1036728392}
     m_Modifications:
+    - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: maxLifetime
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: speedIncreaseFactor
+      value: 0.004
+      objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: obstacleOriginLocation
       value: 
@@ -738,6 +835,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1036728392}
     m_Modifications:
+    - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: maxLifetime
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: speedIncreaseFactor
+      value: 0.004
+      objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: obstacleOriginLocation
       value: 
@@ -815,6 +920,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 1036728392}
     m_Modifications:
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: maxLifetime
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: speedIncreaseFactor
+      value: 0.004
+      objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: obstacleOriginLocation
       value: 
       objectReference: {fileID: 1036728392}
@@ -862,6 +975,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741957, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 5078858878249741959, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: m_Name
       value: Cube (3)
@@ -885,6 +1002,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1036728392}
     m_Modifications:
+    - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: maxLifetime
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: speedIncreaseFactor
+      value: 0.004
+      objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: obstacleOriginLocation
       value: 
@@ -1015,6 +1140,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 1036728392}
     m_Modifications:
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: maxLifetime
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: speedIncreaseFactor
+      value: 0.004
+      objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: obstacleOriginLocation
       value: 
       objectReference: {fileID: 1036728392}
@@ -1085,6 +1218,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1036728392}
     m_Modifications:
+    - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: maxLifetime
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: speedIncreaseFactor
+      value: 0.004
+      objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: obstacleOriginLocation
       value: 
@@ -17652,6 +17793,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 1036728392}
     m_Modifications:
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: maxLifetime
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: speedIncreaseFactor
+      value: 0.004
+      objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: obstacleOriginLocation
       value: 
       objectReference: {fileID: 1036728392}
@@ -20346,9 +20495,11 @@ GameObject:
   - component: {fileID: 6355761553455158516}
   - component: {fileID: 6016778152573390415}
   - component: {fileID: 6016778152573390416}
+  - component: {fileID: 6016778152573390417}
+  - component: {fileID: 6016778152573390418}
   m_Layer: 0
   m_Name: Donut
-  m_TagString: Untagged
+  m_TagString: obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20385,10 +20536,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleOriginLocation: {fileID: 122140848}
-  maxLifetime: 5
+  maxLifetime: 50
   obstacleSpeed: 10
   minObjSpeed: 10
   maxObjSpeed: 30
+  speedIncreaseFactor: 0.004
+--- !u!65 &6016778152573390417
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6016778152573390414}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.16344444, y: 0.07861432, z: 0.15559405}
+  m_Center: {x: -0.14149766, y: 0.013891353, z: 0.07417445}
+--- !u!54 &6016778152573390418
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6016778152573390414}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!23 &6017452199629066070
 MeshRenderer:
   m_ObjectHideFlags: 0
