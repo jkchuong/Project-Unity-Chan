@@ -220,6 +220,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cube (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741959, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
 --- !u!4 &182734437 stripped
@@ -293,6 +297,10 @@ PrefabInstance:
     - target: {fileID: 5078858878249741959, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: m_Name
       value: Cube (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741959, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
@@ -466,6 +474,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cube (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741959, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
 --- !u!4 &364826603 stripped
@@ -549,6 +561,10 @@ PrefabInstance:
     - target: {fileID: 5078858878249741959, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: m_Name
       value: Cube (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741959, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
@@ -821,6 +837,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cube (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741959, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
 --- !u!4 &1153018558 stripped
@@ -894,6 +914,10 @@ PrefabInstance:
     - target: {fileID: 5078858878249741959, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: m_Name
       value: Cube (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741959, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
@@ -983,6 +1007,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cube (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741959, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
 --- !u!4 &1459151136 stripped
@@ -1061,6 +1089,10 @@ PrefabInstance:
     - target: {fileID: 5078858878249741959, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: m_Name
       value: Cube (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741959, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
@@ -1199,6 +1231,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cube (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741959, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
 --- !u!4 &1909907567 stripped
@@ -1277,6 +1313,10 @@ PrefabInstance:
     - target: {fileID: 5078858878249741959, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: m_Name
       value: Cube (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741959, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
@@ -15750,7 +15790,7 @@ GameObject:
   - component: {fileID: 972008424187506742}
   m_Layer: 0
   m_Name: Donut.002
-  m_TagString: Untagged
+  m_TagString: obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17851,6 +17891,10 @@ PrefabInstance:
     - target: {fileID: 5078858878249741959, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: m_Name
       value: Cube
+      objectReference: {fileID: 0}
+    - target: {fileID: 5078858878249741959, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
@@ -20493,9 +20537,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6355761553455158516}
+  - component: {fileID: 6016778152573390417}
   - component: {fileID: 6016778152573390415}
   - component: {fileID: 6016778152573390416}
-  - component: {fileID: 6016778152573390417}
   - component: {fileID: 6016778152573390418}
   m_Layer: 0
   m_Name: Donut
@@ -20569,7 +20613,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!23 &6017452199629066070
 MeshRenderer:
   m_ObjectHideFlags: 0

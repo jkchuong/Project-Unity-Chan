@@ -10,6 +10,8 @@ public class ObstacleRemover : MonoBehaviour
     {
         Obstacle obstacle = other.GetComponent<Obstacle>();
 
+        Debug.Log($"{obstacle.name}");
+
         if (obstacle)
         {
             obstacle.gameObject.SetActive(false);
