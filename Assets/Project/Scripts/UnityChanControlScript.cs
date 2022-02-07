@@ -10,6 +10,7 @@ namespace UnityChan
     public class UnityChanControlScript : MonoBehaviour
     {
         #region Fields
+
         //        
         public float lookSmoother = 3.0f;
         public bool useCurves = true;
@@ -39,6 +40,7 @@ namespace UnityChan
         private int restState = Animator.StringToHash("Base Layer.Rest");
 
         Dictionary<int, Action> animationStates;
+
         #endregion
 
         private void Start()
@@ -69,11 +71,13 @@ namespace UnityChan
             SidewaysMovement();
 
             // perform action depending on current state
-            currentBaseState = anim.GetCurrentAnimatorStateInfo(0);            ;
+            currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
+            ;
             ActionsDependingOnAnimationState(currentBaseState.nameHash);
         }
 
         #region Functions for Update()
+
         private void SetAnimations()
         {
             horizontalInput = Input.GetAxis("Horizontal");
@@ -81,6 +85,7 @@ namespace UnityChan
             anim.SetFloat("Direction", horizontalInput);
             anim.speed = animSpeed;
         }
+
         private void JumpControls()
         {
             rb.useGravity = true;
@@ -91,6 +96,7 @@ namespace UnityChan
                 anim.SetBool("Jump", true);
             }
         }
+
         #endregion
 
         #region Functions for FixedUpdate()
@@ -106,13 +112,15 @@ namespace UnityChan
 
         // performs action depending on current state of character
         private void ActionsDependingOnAnimationState(int currentState)
-        {            
+        {
             if (animationStates.ContainsKey(currentState))
             {
                 animationStates[currentState](); // call action in dictionary that corresponds to currentState
             }
+
             return;
         }
+
         void ResetCollider()
         {
             col.height = orgColHight;
@@ -120,6 +128,7 @@ namespace UnityChan
         }
 
         #region Actions depending on current state
+
         void WhenRunning()
         {
             if (useCurves)
@@ -127,6 +136,7 @@ namespace UnityChan
                 ResetCollider();
             }
         }
+
         void WhenIdle()
         {
             if (useCurves)
@@ -139,6 +149,7 @@ namespace UnityChan
                 anim.SetBool("Rest", true);
             }
         }
+
         void WhenJumping()
         {
             if (!anim.IsInTransition(0))
@@ -171,6 +182,7 @@ namespace UnityChan
                 anim.SetBool("Jump", false);
             }
         }
+
         void WhenResting()
         {
             if (!anim.IsInTransition(0))
@@ -178,6 +190,7 @@ namespace UnityChan
                 anim.SetBool("Rest", false);
             }
         }
+
         #endregion
 
         #endregion
