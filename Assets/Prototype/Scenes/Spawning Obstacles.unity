@@ -166,7 +166,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: speedIncreaseFactor
-      value: 0.004
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: obstacleOriginLocation
@@ -240,7 +240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: speedIncreaseFactor
-      value: 0.004
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: obstacleOriginLocation
@@ -412,7 +412,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: speedIncreaseFactor
-      value: 0.004
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: obstacleOriginLocation
@@ -496,7 +496,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: speedIncreaseFactor
-      value: 0.004
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: obstacleOriginLocation
@@ -767,7 +767,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: speedIncreaseFactor
-      value: 0.004
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: obstacleOriginLocation
@@ -841,7 +841,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: speedIncreaseFactor
-      value: 0.004
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: obstacleOriginLocation
@@ -925,7 +925,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: speedIncreaseFactor
-      value: 0.004
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: obstacleOriginLocation
@@ -1008,7 +1008,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: speedIncreaseFactor
-      value: 0.004
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: obstacleOriginLocation
@@ -1145,7 +1145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: speedIncreaseFactor
-      value: 0.004
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: obstacleOriginLocation
@@ -1224,7 +1224,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: speedIncreaseFactor
-      value: 0.004
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: obstacleOriginLocation
@@ -17798,7 +17798,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: speedIncreaseFactor
-      value: 0.004
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5078858878249741953, guid: de0d598c8f56b354cb1d2cbec8c9fbee, type: 3}
       propertyPath: obstacleOriginLocation
@@ -20540,7 +20540,7 @@ MonoBehaviour:
   obstacleSpeed: 10
   minObjSpeed: 10
   maxObjSpeed: 30
-  speedIncreaseFactor: 0.004
+  speedIncreaseFactor: 0.1
 --- !u!65 &6016778152573390417
 BoxCollider:
   m_ObjectHideFlags: 0
