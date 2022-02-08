@@ -41,6 +41,7 @@ namespace UnityChan
         private int restState = Animator.StringToHash("Base Layer.Rest");
         private int slideState = Animator.StringToHash("Base Layer.Slide");
         private int attackState = Animator.StringToHash("Base Layer.Attack");
+        private int collisionState = Animator.StringToHash("Base Layer.Collision");
 
         Dictionary<int, Action> animationStates;
 
@@ -63,6 +64,7 @@ namespace UnityChan
             animationStates.Add(restState, () => WhenResting());
             animationStates.Add(slideState, () => WhenSliding());
             animationStates.Add(attackState, () => WhenAttacking());
+            animationStates.Add(collisionState, () => WhenDying());
         }
 
         private void Update()
@@ -71,6 +73,7 @@ namespace UnityChan
             JumpControls();
             SlidingControls();
             AttackControls();
+            DeathControls();
         }
 
         private void FixedUpdate()
@@ -79,7 +82,6 @@ namespace UnityChan
 
             // perform action depending on current state
             currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
-            ;
             ActionsDependingOnAnimationState(currentBaseState.nameHash);
         }
 
@@ -115,6 +117,14 @@ namespace UnityChan
             if (Input.GetMouseButtonDown((int)MouseButtonDown.MBD_LEFT))
             {
                 anim.SetBool("Attack", true);
+            }
+        }
+        private void DeathControls()
+        {
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                anim.SetBool("IsDead", true);
+                IsDead = true;
             }
         }
         #endregion
@@ -224,6 +234,13 @@ namespace UnityChan
             if (!anim.IsInTransition(0))
             {
                 anim.SetBool("Attack", false);
+            }
+        }
+        private void WhenDying()
+        {
+            if (!anim.IsInTransition(0))
+            {
+                anim.SetBool("IsDead", false);
             }
         }
         #endregion

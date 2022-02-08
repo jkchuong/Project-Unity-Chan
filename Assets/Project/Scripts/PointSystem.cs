@@ -32,7 +32,7 @@ public class PointSystem : MonoBehaviour
         {
             CalculateDistanceRan();
             CalculatePoints();
-            ResetSeconds();
+            // ResetSeconds();
         }
     }
 
