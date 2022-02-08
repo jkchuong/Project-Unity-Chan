@@ -10,6 +10,7 @@ namespace UnityChan
     public class UnityChanControlScript : MonoBehaviour
     {
         #region Fields
+        public bool IsDead { get; set; }
 
         //        
         public float lookSmoother = 3.0f;

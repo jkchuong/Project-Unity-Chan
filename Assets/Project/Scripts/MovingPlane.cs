@@ -7,7 +7,7 @@ public class MovingPlane : MonoBehaviour
 
     [SerializeField] private Transform planeOriginLocation;
     [SerializeField] private Transform planeEndLocation;
-    [SerializeField] private float speed;
+    [SerializeField] public float speed;
     private Vector3 velocity;
     private Vector3 direction;    
 
