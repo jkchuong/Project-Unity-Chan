@@ -38,6 +38,8 @@ namespace UnityChan
         private int locoState = Animator.StringToHash("Base Layer.Locomotion");
         private int jumpState = Animator.StringToHash("Base Layer.Jump");
         private int restState = Animator.StringToHash("Base Layer.Rest");
+        private int slideState = Animator.StringToHash("Base Layer.Slide");
+        private int attackState = Animator.StringToHash("Base Layer.Attack");
 
         Dictionary<int, Action> animationStates;
 
@@ -58,12 +60,16 @@ namespace UnityChan
             animationStates.Add(locoState, () => WhenRunning());
             animationStates.Add(jumpState, () => WhenJumping());
             animationStates.Add(restState, () => WhenResting());
+            animationStates.Add(slideState, () => WhenSliding());
+            animationStates.Add(attackState, () => WhenAttacking());
         }
 
         private void Update()
         {
             SetAnimations();
             JumpControls();
+            SlidingControls();
+            AttackControls();
         }
 
         private void FixedUpdate()
@@ -95,8 +101,21 @@ namespace UnityChan
                 rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
                 anim.SetBool("Jump", true);
             }
+        }        
+        private void SlidingControls()
+        {
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                anim.SetBool("Slide", true);
+            }
         }
-
+        private void AttackControls()
+        {
+            if (Input.GetMouseButtonDown((int)MouseButtonDown.MBD_LEFT))
+            {
+                anim.SetBool("Attack", true);
+            }
+        }
         #endregion
 
         #region Functions for FixedUpdate()
@@ -112,10 +131,11 @@ namespace UnityChan
 
         // performs action depending on current state of character
         private void ActionsDependingOnAnimationState(int currentState)
-        {
+        {            
+            // check that dictionary has that state
             if (animationStates.ContainsKey(currentState))
             {
-                animationStates[currentState](); // call action in dictionary that corresponds to currentState
+                animationStates[currentState](); // invoke action in dictionary that corresponds to currentState
             }
 
             return;
@@ -191,6 +211,20 @@ namespace UnityChan
             }
         }
 
+        private void WhenSliding()
+        {
+            if (!anim.IsInTransition(0))
+            {
+                anim.SetBool("Slide", false);
+            }
+        }
+        private void WhenAttacking()
+        {
+            if (!anim.IsInTransition(0))
+            {
+                anim.SetBool("Attack", false);
+            }
+        }
         #endregion
 
         #endregion
