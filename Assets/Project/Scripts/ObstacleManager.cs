@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Project.Scripts.Obstacles
 {
@@ -9,25 +10,31 @@ namespace Assets.Project.Scripts.Obstacles
         [SerializeField] private GameObject[] allObstacles; // list of prefabs outside
         [SerializeField] private float fastestSpawnRate;
         [SerializeField] private float lowestSpawnRate;
+        [SerializeField] private float initialSpawnDelay = 5f;
         #endregion
+        
+        private Button startButton;
 
         private void Start()
         {
             // init random spawning coroutine
             fastestSpawnRate = 0.2f;
             lowestSpawnRate = 1f;
-            StartCoroutine(RandomSpawning(1));            
+            
+            startButton = GameObject.Find("Start Button").GetComponent<Button>();
+            startButton.onClick.AddListener(BeginObstacleSpawning);
         }
 
-        private void Update()
-        {
 
+        private void BeginObstacleSpawning()
+        {
+            StartCoroutine(RandomSpawning(1));
         }
 
         // random spawn coroutine function that changes the spawn rate every time
         private IEnumerator RandomSpawning(float spawnInterval)
-        {         
-            yield return new WaitForSeconds(spawnInterval);
+        {
+            yield return new WaitForSeconds(initialSpawnDelay);
             while (true)
             {
                 SpawnObstacle();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace UnityChan
 {
@@ -20,11 +21,14 @@ namespace UnityChan
         #region Fields
         public bool IsDead { get; set; }
 
+        private bool isGameRunning = false;
         private Rigidbody rb;
         private Animator anim;
         private Vector3 velocity;
         private float horizontalInput;
         private float verticalInput = 1;
+        
+        private Button startButton;
 
         [SerializeField] private float leftRightSpeed = 7.0f;
         [SerializeField] private float jumpPower = 5.0f;
@@ -33,12 +37,12 @@ namespace UnityChan
 
         #region Ability fields
         // animator parameters
-        [HideInInspector] public const string JUMP_PARAM = "Jump";
-        [HideInInspector] public const string SLIDE_PARAM = "Slide";
-        [HideInInspector] public const string ATTACK_PARAM = "Attack";
-        [HideInInspector] public const string DEATH_PARAM = "Collision";
-        [HideInInspector] public const string SPEED_PARAM = "Speed";
-        [HideInInspector] public const string DIRECTION_PARAM = "Direction";
+        [HideInInspector] public string JUMP_PARAM = "Jump";
+        [HideInInspector] public string SLIDE_PARAM = "Slide";
+        [HideInInspector] public string ATTACK_PARAM = "Attack";
+        [HideInInspector] public string DEATH_PARAM = "Collision";
+        [HideInInspector] public string SPEED_PARAM = "Speed";
+        [HideInInspector] public string DIRECTION_PARAM = "Direction";
 
         // dictionary that binds the animator parameter and the ability model
         public Dictionary<string, Ability> animationStates;      
@@ -50,24 +54,30 @@ namespace UnityChan
             rb = GetComponent<Rigidbody>();
 
             // Create Abilities, by default is disabled      
-            var jumpingAbility = new Ability() { AnimParamName = JUMP_PARAM, IsEnabled = false ,Key = KeyCode.Space, FuncToCall = () => JumpControls()};
-            var slidinAbility = new Ability() { AnimParamName = SLIDE_PARAM, IsEnabled = false ,Key = KeyCode.S, FuncToCall = () => SlidingControls()};
-            var attackAbility = new Ability() { AnimParamName = ATTACK_PARAM, IsEnabled = false ,Key = KeyCode.Mouse0, FuncToCall = () => AttackControls()};
-            var abilityToDie = new Ability() { AnimParamName = DEATH_PARAM, IsEnabled = false, Key = KeyCode.K, FuncToCall = () => DeathControls() };
+            var jumpingAbility = new Ability() { AnimParamName = JUMP_PARAM, IsEnabled = false ,Key = KeyCode.Space, FuncToCall = JumpControls};
+            var slidingAbility = new Ability() { AnimParamName = SLIDE_PARAM, IsEnabled = false ,Key = KeyCode.S, FuncToCall = SlidingControls};
+            var attackAbility = new Ability() { AnimParamName = ATTACK_PARAM, IsEnabled = false ,Key = KeyCode.Mouse0, FuncToCall = AttackControls};
+            var abilityToDie = new Ability() { AnimParamName = DEATH_PARAM, IsEnabled = true, Key = KeyCode.K, FuncToCall = DeathControls };
 
             // bind ability to string name same as animation parameter
             // careful: the enabling of the actions are performed on Abilities manager, the idea is to enable them per milestone
-            animationStates = new Dictionary<string, Ability>();
-            animationStates.Add(JUMP_PARAM, jumpingAbility);
-            animationStates.Add(SLIDE_PARAM, slidinAbility);
-            animationStates.Add(ATTACK_PARAM, attackAbility);
-            animationStates.Add(DEATH_PARAM, abilityToDie);
+            animationStates = new Dictionary<string, Ability>
+            {
+                {JUMP_PARAM, jumpingAbility},
+                {SLIDE_PARAM, slidingAbility},
+                {ATTACK_PARAM, attackAbility},
+                {DEATH_PARAM, abilityToDie}
+            };
+
+            startButton = GameObject.Find("Start Button").GetComponent<Button>();
+            startButton.onClick.AddListener(delegate { isGameRunning = true; });
         }
 
         private void Update()
         {
+            if (!isGameRunning) return;
             SetAnimations();
-            DetectInputs(); // detects posible inputs and calls function ability is enabled
+            DetectInputs(); // detects possible inputs and calls function ability is enabled
         }
 
         private void FixedUpdate()
@@ -77,7 +87,7 @@ namespace UnityChan
 
         #region Functions for calling dictionary action depending on player input
 
-        // detects all posible inputs we set and perform action if enabled
+        // detects all possible inputs we set and perform action if enabled
         private void DetectInputs()
         {
             if (Input.GetKeyDown(TryGetKeyCode(JUMP_PARAM)))
