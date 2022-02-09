@@ -1150,6 +1150,7 @@ MonoBehaviour:
   - {fileID: 1557741497}
   fastestSpawnRate: 0.2
   lowestSpawnRate: 1.5
+  initialSpawnDelay: 5
 --- !u!4 &1901818930
 Transform:
   m_ObjectHideFlags: 0
