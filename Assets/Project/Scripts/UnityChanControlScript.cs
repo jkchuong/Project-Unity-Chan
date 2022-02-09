@@ -28,17 +28,17 @@ namespace UnityChan
 
         [SerializeField] private float leftRightSpeed = 7.0f;
         [SerializeField] private float jumpPower = 5.0f;
-        [SerializeField] private float animSpeed = 1.5f;                
+        [SerializeField] private float animSpeed = 1.5f;
         #endregion
 
         #region Ability fields
         // animator parameters
-        public string JUMP_PARAM = "Jump";
-        public string SLIDE_PARAM = "Slide";
-        public string ATTACK_PARAM = "Attack";
-        public string DEATH_PARAM = "Collision";
-        public string SPEED_PARAM = "Speed";
-        public string DIRECTION_PARAM = "Direction";
+        [HideInInspector] public const string JUMP_PARAM = "Jump";
+        [HideInInspector] public const string SLIDE_PARAM = "Slide";
+        [HideInInspector] public const string ATTACK_PARAM = "Attack";
+        [HideInInspector] public const string DEATH_PARAM = "Collision";
+        [HideInInspector] public const string SPEED_PARAM = "Speed";
+        [HideInInspector] public const string DIRECTION_PARAM = "Direction";
 
         // dictionary that binds the animator parameter and the ability model
         public Dictionary<string, Ability> animationStates;      
@@ -112,7 +112,6 @@ namespace UnityChan
             {               
                 animationStates[requestedAction].FuncToCall(); // invoke action in dictionary that corresponds to it
             }
-            return;
         }
 
         // ====== Set of functions that can be called if enabled =========
