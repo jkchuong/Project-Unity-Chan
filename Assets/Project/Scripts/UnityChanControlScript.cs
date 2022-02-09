@@ -33,12 +33,12 @@ namespace UnityChan
 
         #region Ability fields
         // animator parameters
-        [HideInInspector] public const string JUMP_PARAM = "Jump";
-        [HideInInspector] public const string SLIDE_PARAM = "Slide";
-        [HideInInspector] public const string ATTACK_PARAM = "Attack";
-        [HideInInspector] public const string DEATH_PARAM = "Collision";
-        [HideInInspector] public const string SPEED_PARAM = "Speed";
-        [HideInInspector] public const string DIRECTION_PARAM = "Direction";
+        [HideInInspector] public string JUMP_PARAM = "Jump";
+        [HideInInspector] public string SLIDE_PARAM = "Slide";
+        [HideInInspector] public string ATTACK_PARAM = "Attack";
+        [HideInInspector] public string DEATH_PARAM = "Collision";
+        [HideInInspector] public string SPEED_PARAM = "Speed";
+        [HideInInspector] public string DIRECTION_PARAM = "Direction";
 
         // dictionary that binds the animator parameter and the ability model
         public Dictionary<string, Ability> animationStates;      
