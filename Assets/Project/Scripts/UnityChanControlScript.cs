@@ -4,121 +4,152 @@ using UnityEngine;
 
 namespace UnityChan
 {
+    public class Ability
+    {
+        public string AnimParamName { get; set; }
+        public KeyCode Key { get; set; }
+        public Action FuncToCall { get; set; }
+        public bool IsEnabled { get; set; }
+    }
+
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(CapsuleCollider))]
     [RequireComponent(typeof(Rigidbody))]
     public class UnityChanControlScript : MonoBehaviour
     {
         #region Fields
+        public bool IsDead { get; set; }
 
-        //        
-        public float lookSmoother = 3.0f;
-        public bool useCurves = true;
-        public float useCurvesHeight = 0.5f;
-
-        //
-        private CapsuleCollider col;
         private Rigidbody rb;
-        private Vector3 velocity;
-        private float orgColHight;
-        private Vector3 orgVectColCenter;
         private Animator anim;
-        private AnimatorStateInfo currentBaseState;
-
-        //
+        private Vector3 velocity;
         private float horizontalInput;
         private float verticalInput = 1;
-        public float leftRightSpeed = 7.0f;
-        public float rotateSpeed = 2.0f;
-        public float jumpPower = 5.0f;
-        public float animSpeed = 1.5f;
 
-        //
-        private int idleState = Animator.StringToHash("Base Layer.Idle");
-        private int locoState = Animator.StringToHash("Base Layer.Locomotion");
-        private int jumpState = Animator.StringToHash("Base Layer.Jump");
-        private int restState = Animator.StringToHash("Base Layer.Rest");
-        private int slideState = Animator.StringToHash("Base Layer.Slide");
-        private int attackState = Animator.StringToHash("Base Layer.Attack");
+        [SerializeField] private float leftRightSpeed = 7.0f;
+        [SerializeField] private float jumpPower = 5.0f;
+        [SerializeField] private float animSpeed = 1.5f;
+        #endregion
 
-        Dictionary<int, Action> animationStates;
+        #region Ability fields
+        // animator parameters
+        [HideInInspector] public const string JUMP_PARAM = "Jump";
+        [HideInInspector] public const string SLIDE_PARAM = "Slide";
+        [HideInInspector] public const string ATTACK_PARAM = "Attack";
+        [HideInInspector] public const string DEATH_PARAM = "Collision";
+        [HideInInspector] public const string SPEED_PARAM = "Speed";
+        [HideInInspector] public const string DIRECTION_PARAM = "Direction";
 
+        // dictionary that binds the animator parameter and the ability model
+        public Dictionary<string, Ability> animationStates;      
         #endregion
 
         private void Start()
         {
             anim = GetComponent<Animator>();
-            col = GetComponent<CapsuleCollider>();
             rb = GetComponent<Rigidbody>();
 
-            orgColHight = col.height;
-            orgVectColCenter = col.center;
+            // Create Abilities, by default is disabled      
+            var jumpingAbility = new Ability() { AnimParamName = JUMP_PARAM, IsEnabled = false ,Key = KeyCode.Space, FuncToCall = () => JumpControls()};
+            var slidinAbility = new Ability() { AnimParamName = SLIDE_PARAM, IsEnabled = false ,Key = KeyCode.S, FuncToCall = () => SlidingControls()};
+            var attackAbility = new Ability() { AnimParamName = ATTACK_PARAM, IsEnabled = false ,Key = KeyCode.Mouse0, FuncToCall = () => AttackControls()};
+            var abilityToDie = new Ability() { AnimParamName = DEATH_PARAM, IsEnabled = false, Key = KeyCode.K, FuncToCall = () => DeathControls() };
 
-            // populate dictionary
-            animationStates = new Dictionary<int, Action>();
-            animationStates.Add(idleState, () => WhenIdle());
-            animationStates.Add(locoState, () => WhenRunning());
-            animationStates.Add(jumpState, () => WhenJumping());
-            animationStates.Add(restState, () => WhenResting());
-            animationStates.Add(slideState, () => WhenSliding());
-            animationStates.Add(attackState, () => WhenAttacking());
+            // bind ability to string name same as animation parameter
+            // careful: the enabling of the actions are performed on Abilities manager, the idea is to enable them per milestone
+            animationStates = new Dictionary<string, Ability>();
+            animationStates.Add(JUMP_PARAM, jumpingAbility);
+            animationStates.Add(SLIDE_PARAM, slidinAbility);
+            animationStates.Add(ATTACK_PARAM, attackAbility);
+            animationStates.Add(DEATH_PARAM, abilityToDie);
         }
 
         private void Update()
         {
             SetAnimations();
-            JumpControls();
-            SlidingControls();
-            AttackControls();
+            DetectInputs(); // detects posible inputs and calls function ability is enabled
         }
 
         private void FixedUpdate()
         {
             SidewaysMovement();
-
-            // perform action depending on current state
-            currentBaseState = anim.GetCurrentAnimatorStateInfo(0);
-            ;
-            ActionsDependingOnAnimationState(currentBaseState.nameHash);
         }
 
-        #region Functions for Update()
+        #region Functions for calling dictionary action depending on player input
 
-        private void SetAnimations()
+        // detects all posible inputs we set and perform action if enabled
+        private void DetectInputs()
         {
-            horizontalInput = Input.GetAxis("Horizontal");
-            anim.SetFloat("Speed", verticalInput);
-            anim.SetFloat("Direction", horizontalInput);
-            anim.speed = animSpeed;
+            if (Input.GetKeyDown(TryGetKeyCode(JUMP_PARAM)))
+            {
+                PerformActionIfEnabled(JUMP_PARAM);
+            }
+            else if (Input.GetKeyDown(TryGetKeyCode(SLIDE_PARAM)))
+            {
+                PerformActionIfEnabled(SLIDE_PARAM);
+            }
+            else if (Input.GetKeyDown(TryGetKeyCode(ATTACK_PARAM)))
+            {
+                PerformActionIfEnabled(ATTACK_PARAM);
+            }
+            // tmp to test death animation
+            else if (Input.GetKeyDown(TryGetKeyCode(DEATH_PARAM)))
+            {
+                PerformActionIfEnabled(DEATH_PARAM);
+            }
         }
 
+        // return keycode if mapped in our dictionary
+        private KeyCode TryGetKeyCode(string animatorParam)
+        {
+            return animationStates.ContainsKey(animatorParam) ? animationStates[animatorParam].Key : default;
+        }
+
+        // if param exists and is enabled then call the function that it points to
+        private void PerformActionIfEnabled(string requestedAction)
+        {
+            if (animationStates.ContainsKey(requestedAction) && animationStates[requestedAction].IsEnabled)
+            {               
+                animationStates[requestedAction].FuncToCall(); // invoke action in dictionary that corresponds to it
+            }
+        }
+
+        // ====== Set of functions that can be called if enabled =========
         private void JumpControls()
         {
-            rb.useGravity = true;
+            if (!anim.IsInTransition(0))
+            {
+                rb.useGravity = true;
 
-            if (Input.GetButtonDown("Jump"))
-            {
                 rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
-                anim.SetBool("Jump", true);
-            }
-        }        
+                anim.SetTrigger(JUMP_PARAM);
+            }            
+        }           
+
         private void SlidingControls()
-        {
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                anim.SetBool("Slide", true);
-            }
+        {            
+            anim.SetTrigger(SLIDE_PARAM);
         }
+
         private void AttackControls()
+        {            
+            anim.SetTrigger(ATTACK_PARAM);            
+        }
+
+        private void DeathControls()
         {
-            if (Input.GetMouseButtonDown((int)MouseButtonDown.MBD_LEFT))
-            {
-                anim.SetBool("Attack", true);
-            }
+            anim.SetTrigger(DEATH_PARAM);
         }
         #endregion
 
-        #region Functions for FixedUpdate()
+        #region Other
+        private void SetAnimations()
+        {
+            horizontalInput = Input.GetAxis("Horizontal");
+            anim.SetFloat(SPEED_PARAM, verticalInput);
+            anim.SetFloat(DIRECTION_PARAM, horizontalInput);
+            anim.speed = animSpeed;
+        }
 
         // enables player to only move move sideways
         private void SidewaysMovement()
@@ -127,106 +158,7 @@ namespace UnityChan
             velocity = transform.TransformDirection(velocity);
             velocity *= leftRightSpeed;
             transform.localPosition += velocity * Time.fixedDeltaTime;
-        }
-
-        // performs action depending on current state of character
-        private void ActionsDependingOnAnimationState(int currentState)
-        {            
-            // check that dictionary has that state
-            if (animationStates.ContainsKey(currentState))
-            {
-                animationStates[currentState](); // invoke action in dictionary that corresponds to currentState
-            }
-
-            return;
-        }
-
-        void ResetCollider()
-        {
-            col.height = orgColHight;
-            col.center = orgVectColCenter;
-        }
-
-        #region Actions depending on current state
-
-        void WhenRunning()
-        {
-            if (useCurves)
-            {
-                ResetCollider();
-            }
-        }
-
-        void WhenIdle()
-        {
-            if (useCurves)
-            {
-                ResetCollider();
-            }
-
-            if (Input.GetButtonDown("Jump"))
-            {
-                anim.SetBool("Rest", true);
-            }
-        }
-
-        void WhenJumping()
-        {
-            if (!anim.IsInTransition(0))
-            {
-                if (useCurves)
-                {
-                    float jumpHeight = anim.GetFloat("JumpHeight");
-                    float gravityControl = anim.GetFloat("GravityControl");
-                    if (gravityControl > 0)
-                        rb.useGravity = false;
-
-                    Ray ray = new Ray(transform.position + Vector3.up, -Vector3.up);
-                    RaycastHit hitInfo = new RaycastHit();
-
-                    if (Physics.Raycast(ray, out hitInfo))
-                    {
-                        if (hitInfo.distance > useCurvesHeight)
-                        {
-                            col.height = orgColHight - jumpHeight;
-                            float adjCenterY = orgVectColCenter.y + jumpHeight;
-                            col.center = new Vector3(0, adjCenterY, 0);
-                        }
-                        else
-                        {
-                            ResetCollider();
-                        }
-                    }
-                }
-
-                anim.SetBool("Jump", false);
-            }
-        }
-
-        void WhenResting()
-        {
-            if (!anim.IsInTransition(0))
-            {
-                anim.SetBool("Rest", false);
-            }
-        }
-
-        private void WhenSliding()
-        {
-            if (!anim.IsInTransition(0))
-            {
-                anim.SetBool("Slide", false);
-            }
-        }
-        private void WhenAttacking()
-        {
-            if (!anim.IsInTransition(0))
-            {
-                anim.SetBool("Attack", false);
-            }
-        }
-        #endregion
-
+        }        
         #endregion
     }
 }
