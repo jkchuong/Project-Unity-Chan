@@ -7,7 +7,7 @@ public class PointSystem : MonoBehaviour
 {
     [SerializeField] public MovingPlane plane; // get a plane for speed information so no magic numbers
     [SerializeField] public UnityChanControlScript unityChan; // get unity-chan alive status    
-    private float secondsRunning;
+    public float secondsRunning;
 
     public float Distance { get; set; }
     public int Points { get; set; }
