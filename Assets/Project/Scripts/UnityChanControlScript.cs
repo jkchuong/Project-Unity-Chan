@@ -37,6 +37,8 @@ namespace UnityChan
         public string SLIDE_PARAM = "Slide";
         public string ATTACK_PARAM = "Attack";
         public string DEATH_PARAM = "Collision";
+        public string SPEED_PARAM = "Speed";
+        public string DIRECTION_PARAM = "Direction";
 
         // dictionary that binds the animator parameter and the ability model
         public Dictionary<string, Ability> animationStates;      
@@ -114,7 +116,7 @@ namespace UnityChan
         }
 
         // ====== Set of functions that can be called if enabled =========
-        protected void JumpControls()
+        private void JumpControls()
         {
             if (!anim.IsInTransition(0))
             {
@@ -125,17 +127,17 @@ namespace UnityChan
             }            
         }           
 
-        protected void SlidingControls()
+        private void SlidingControls()
         {            
             anim.SetTrigger(SLIDE_PARAM);
         }
 
-        protected void AttackControls()
+        private void AttackControls()
         {            
             anim.SetTrigger(ATTACK_PARAM);            
         }
 
-        protected void DeathControls()
+        private void DeathControls()
         {
             anim.SetTrigger(DEATH_PARAM);
         }
@@ -145,8 +147,8 @@ namespace UnityChan
         private void SetAnimations()
         {
             horizontalInput = Input.GetAxis("Horizontal");
-            anim.SetFloat("Speed", verticalInput);
-            anim.SetFloat("Direction", horizontalInput);
+            anim.SetFloat(SPEED_PARAM, verticalInput);
+            anim.SetFloat(DIRECTION_PARAM, horizontalInput);
             anim.speed = animSpeed;
         }
 
