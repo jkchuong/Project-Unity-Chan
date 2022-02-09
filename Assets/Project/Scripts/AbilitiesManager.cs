@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class AbilitiesManager : MonoBehaviour
 {
-
     [SerializeField] private PointSystem pointSystem;
     [SerializeField] private UnityChanControlScript unityChan;
 
@@ -14,27 +13,21 @@ public class AbilitiesManager : MonoBehaviour
     [SerializeField] private float secondsToEnableSliding = 20;
     [SerializeField] private float secondsToEnableAttack = 30;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // enable jumping after certain time or distance
         if (pointSystem.secondsRunning > secondsToEnableJumping)
         {
-            EnableAbility(unityChan.jumpParam);
+            EnableAbility(unityChan.JUMP_PARAM);
         }
         if (pointSystem.secondsRunning > secondsToEnableSliding)
         {
-            EnableAbility(unityChan.slideParam);
+            EnableAbility(unityChan.SLIDE_PARAM);
         }
         if (pointSystem.secondsRunning > secondsToEnableAttack)
         {
-            EnableAbility(unityChan.attackParam);
+            EnableAbility(unityChan.ATTACK_PARAM);
         }
     }
 

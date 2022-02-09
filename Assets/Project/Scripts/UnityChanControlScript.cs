@@ -20,35 +20,23 @@ namespace UnityChan
         #region Fields
         public bool IsDead { get; set; }
 
-        //        
-        public float lookSmoother = 3.0f;
-        public bool useCurves = true;
-        public float useCurvesHeight = 0.5f;
-
-        //
-        private CapsuleCollider col;
         private Rigidbody rb;
-        private Vector3 velocity;
-        private float orgColHight;
-        private Vector3 orgVectColCenter;
         private Animator anim;
-
-        //
+        private Vector3 velocity;
         private float horizontalInput;
         private float verticalInput = 1;
-        public float leftRightSpeed = 7.0f;
-        public float rotateSpeed = 2.0f;
-        public float jumpPower = 5.0f;
-        public float animSpeed = 1.5f;
 
+        [SerializeField] private float leftRightSpeed = 7.0f;
+        [SerializeField] private float jumpPower = 5.0f;
+        [SerializeField] private float animSpeed = 1.5f;                
         #endregion
 
         #region Ability fields
         // animator parameters
-        public string jumpParam = "Jump";
-        public string slideParam = "Slide";
-        public string attackParam = "Attack";
-        public string deathParam = "Collision";
+        public string JUMP_PARAM = "Jump";
+        public string SLIDE_PARAM = "Slide";
+        public string ATTACK_PARAM = "Attack";
+        public string DEATH_PARAM = "Collision";
 
         // dictionary that binds the animator parameter and the ability model
         public Dictionary<string, Ability> animationStates;      
@@ -57,25 +45,21 @@ namespace UnityChan
         private void Start()
         {
             anim = GetComponent<Animator>();
-            col = GetComponent<CapsuleCollider>();
             rb = GetComponent<Rigidbody>();
 
-            orgColHight = col.height;
-            orgVectColCenter = col.center;
-
             // Create Abilities, by default is disabled      
-            var jumpingAbility = new Ability() { AnimParamName = jumpParam, IsEnabled = false ,Key = KeyCode.Space, FuncToCall = () => JumpControls()};
-            var slidinAbility = new Ability() { AnimParamName = slideParam, IsEnabled = false ,Key = KeyCode.S, FuncToCall = () => SlidingControls()};
-            var attackAbility = new Ability() { AnimParamName = attackParam, IsEnabled = false ,Key = KeyCode.Mouse0, FuncToCall = () => AttackControls()};
-            var abilityToDie = new Ability() { AnimParamName = deathParam, IsEnabled = false, Key = KeyCode.K, FuncToCall = () => DeathControls() };
+            var jumpingAbility = new Ability() { AnimParamName = JUMP_PARAM, IsEnabled = false ,Key = KeyCode.Space, FuncToCall = () => JumpControls()};
+            var slidinAbility = new Ability() { AnimParamName = SLIDE_PARAM, IsEnabled = false ,Key = KeyCode.S, FuncToCall = () => SlidingControls()};
+            var attackAbility = new Ability() { AnimParamName = ATTACK_PARAM, IsEnabled = false ,Key = KeyCode.Mouse0, FuncToCall = () => AttackControls()};
+            var abilityToDie = new Ability() { AnimParamName = DEATH_PARAM, IsEnabled = false, Key = KeyCode.K, FuncToCall = () => DeathControls() };
 
             // bind ability to string name same as animation parameter
             // careful: the enabling of the actions are performed on Abilities manager, the idea is to enable them per milestone
             animationStates = new Dictionary<string, Ability>();
-            animationStates.Add(jumpParam, jumpingAbility);
-            animationStates.Add(slideParam, slidinAbility);
-            animationStates.Add(attackParam, attackAbility);
-            animationStates.Add(deathParam, abilityToDie);
+            animationStates.Add(JUMP_PARAM, jumpingAbility);
+            animationStates.Add(SLIDE_PARAM, slidinAbility);
+            animationStates.Add(ATTACK_PARAM, attackAbility);
+            animationStates.Add(DEATH_PARAM, abilityToDie);
         }
 
         private void Update()
@@ -94,22 +78,22 @@ namespace UnityChan
         // detects all posible inputs we set and perform action if enabled
         private void DetectInputs()
         {
-            if (Input.GetKeyDown(TryGetKeyCode(jumpParam)))
+            if (Input.GetKeyDown(TryGetKeyCode(JUMP_PARAM)))
             {
-                PerformActionIfEnabled(jumpParam);
+                PerformActionIfEnabled(JUMP_PARAM);
             }
-            else if (Input.GetKeyDown(TryGetKeyCode(slideParam)))
+            else if (Input.GetKeyDown(TryGetKeyCode(SLIDE_PARAM)))
             {
-                PerformActionIfEnabled(slideParam);
+                PerformActionIfEnabled(SLIDE_PARAM);
             }
-            else if (Input.GetKeyDown(TryGetKeyCode(attackParam)))
+            else if (Input.GetKeyDown(TryGetKeyCode(ATTACK_PARAM)))
             {
-                PerformActionIfEnabled(attackParam);
+                PerformActionIfEnabled(ATTACK_PARAM);
             }
             // tmp to test death animation
-            else if (Input.GetKeyDown(TryGetKeyCode(deathParam)))
+            else if (Input.GetKeyDown(TryGetKeyCode(DEATH_PARAM)))
             {
-                PerformActionIfEnabled(deathParam);
+                PerformActionIfEnabled(DEATH_PARAM);
             }
         }
 
@@ -137,20 +121,23 @@ namespace UnityChan
                 rb.useGravity = true;
 
                 rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
-                anim.SetTrigger(jumpParam);
+                anim.SetTrigger(JUMP_PARAM);
             }            
         }           
+
         protected void SlidingControls()
         {            
-            anim.SetTrigger(slideParam);
+            anim.SetTrigger(SLIDE_PARAM);
         }
+
         protected void AttackControls()
         {            
-            anim.SetTrigger(attackParam);            
+            anim.SetTrigger(ATTACK_PARAM);            
         }
+
         protected void DeathControls()
         {
-            anim.SetTrigger(deathParam);
+            anim.SetTrigger(DEATH_PARAM);
         }
         #endregion
 
@@ -171,7 +158,6 @@ namespace UnityChan
             velocity *= leftRightSpeed;
             transform.localPosition += velocity * Time.fixedDeltaTime;
         }        
-
         #endregion
     }
 }

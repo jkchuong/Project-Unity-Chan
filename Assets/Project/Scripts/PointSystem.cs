@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class PointSystem : MonoBehaviour
 {
-    [SerializeField] public MovingPlane plane; // get a plane for speed information so no magic numbers
-    [SerializeField] public UnityChanControlScript unityChan; // get unity-chan alive status    
+    public MovingPlane plane; // get a plane for speed information so no magic numbers
+    public UnityChanControlScript unityChan; // get unity-chan alive status    
     public float secondsRunning;
 
     public float Distance { get; set; }
@@ -22,7 +22,7 @@ public class PointSystem : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // keep updating till death
         secondsRunning += Time.deltaTime;
