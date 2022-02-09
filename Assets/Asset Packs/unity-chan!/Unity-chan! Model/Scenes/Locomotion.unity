@@ -790,6 +790,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointSystem: {fileID: 2058873469}
   unityChan: {fileID: 2129226473}
+  secondsToEnableJumping: 10
+  secondsToEnableSliding: 15
+  secondsToEnableAttack: 20
 --- !u!1 &1310681320
 GameObject:
   m_ObjectHideFlags: 0
@@ -1158,3 +1161,7 @@ MonoBehaviour:
   rotateSpeed: 2
   jumpPower: 3
   animSpeed: 1.5
+  jumpParam: Jump
+  slideParam: Slide
+  attackParam: Attack
+  deathParam: Collision

@@ -10,25 +10,39 @@ public class AbilitiesManager : MonoBehaviour
     [SerializeField] private PointSystem pointSystem;
     [SerializeField] private UnityChanControlScript unityChan;
 
-    private string jumpParam = "Jump";
-    private string slideParam = "Slide";
-    private string attackParam = "Attack";
-    private string deathParam = "Collision";
+    [SerializeField] private float secondsToEnableJumping = 10;
+    [SerializeField] private float secondsToEnableSliding = 20;
+    [SerializeField] private float secondsToEnableAttack = 30;
 
     // Start is called before the first frame update
     void Start()
     {
-        //pointSystem = GetComponent<PointSystem>();
-        //unityChan = GetComponent<UnityChanControlScript>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (pointSystem.secondsRunning > 3.0f)
+        // enable jumping after certain time or distance
+        if (pointSystem.secondsRunning > secondsToEnableJumping)
         {
-            //unityChan.animationStates[jumpParam].IsEnabled = true; ;
-            
+            EnableAbility(unityChan.jumpParam);
         }
+        if (pointSystem.secondsRunning > secondsToEnableSliding)
+        {
+            EnableAbility(unityChan.slideParam);
+        }
+        if (pointSystem.secondsRunning > secondsToEnableAttack)
+        {
+            EnableAbility(unityChan.attackParam);
+        }
+    }
+
+    private void EnableAbility(string abilityToEnable)
+    {        
+        if (!unityChan.animationStates[abilityToEnable].IsEnabled)
+        {
+            unityChan.animationStates[abilityToEnable].IsEnabled = true;
+        }        
     }
 }

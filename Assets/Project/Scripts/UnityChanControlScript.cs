@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace UnityChan
 {
-
     public class Ability
     {
         public string AnimParamName { get; set; }
@@ -44,23 +43,15 @@ namespace UnityChan
 
         #endregion
 
-        #region Enabling movement mechanics
+        #region Ability fields
         // animator parameters
-        private string jumpParam = "Jump";
-        private string slideParam = "Slide";
-        private string attackParam = "Attack";
-        private string deathParam = "Collision";
+        public string jumpParam = "Jump";
+        public string slideParam = "Slide";
+        public string attackParam = "Attack";
+        public string deathParam = "Collision";
 
-        // dictionary that binds the animator parameter, the key that is pressed and the action to call
-        public Dictionary<string, Node> animationStates;
-
-        // custom struct to that holds keycode and function to call information
-        public struct Node
-        {
-            public KeyCode Key;
-            public Action FuncToCall;
-            public bool IsEnabled { get; set; }
-        }        
+        // dictionary that binds the animator parameter and the ability model
+        public Dictionary<string, Ability> animationStates;      
         #endregion
 
         private void Start()
@@ -72,21 +63,25 @@ namespace UnityChan
             orgColHight = col.height;
             orgVectColCenter = col.center;
 
-            // Dictionary binds animator parameter and keycode and function to call
-            // careful: the enabling of the actions are performed on Abilities manager, the idea is to enable them per milestone
-            animationStates = new Dictionary<string, Node>();
-            animationStates.Add(jumpParam, new Node(){ IsEnabled = true, Key = KeyCode.Space, FuncToCall = () => JumpControls()});
-            animationStates.Add(slideParam, new Node() { IsEnabled = true, Key = KeyCode.S, FuncToCall = () => SlidingControls() });
-            animationStates.Add(attackParam, new Node() { IsEnabled = false, Key = KeyCode.Mouse0, FuncToCall = () => AttackControls()});
+            // Create Abilities, by default is disabled      
+            var jumpingAbility = new Ability() { AnimParamName = jumpParam, IsEnabled = false ,Key = KeyCode.Space, FuncToCall = () => JumpControls()};
+            var slidinAbility = new Ability() { AnimParamName = slideParam, IsEnabled = false ,Key = KeyCode.S, FuncToCall = () => SlidingControls()};
+            var attackAbility = new Ability() { AnimParamName = attackParam, IsEnabled = false ,Key = KeyCode.Mouse0, FuncToCall = () => AttackControls()};
+            var abilityToDie = new Ability() { AnimParamName = deathParam, IsEnabled = false, Key = KeyCode.K, FuncToCall = () => DeathControls() };
 
-            // tmp state just to test when she dead
-            animationStates.Add(deathParam, new Node() { IsEnabled = false, Key = KeyCode.K, FuncToCall = () => DeathControls() });
+            // bind ability to string name same as animation parameter
+            // careful: the enabling of the actions are performed on Abilities manager, the idea is to enable them per milestone
+            animationStates = new Dictionary<string, Ability>();
+            animationStates.Add(jumpParam, jumpingAbility);
+            animationStates.Add(slideParam, slidinAbility);
+            animationStates.Add(attackParam, attackAbility);
+            animationStates.Add(deathParam, abilityToDie);
         }
 
         private void Update()
         {
             SetAnimations();
-            DetectInputs(); // detects posible inputs and calls function if they exist i.e registered in the dictionary
+            DetectInputs(); // detects posible inputs and calls function ability is enabled
         }
 
         private void FixedUpdate()
