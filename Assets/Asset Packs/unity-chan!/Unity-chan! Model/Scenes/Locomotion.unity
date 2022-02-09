@@ -430,6 +430,10 @@ PrefabInstance:
       propertyPath: isWindActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400114, guid: 69c3ed15e9d13481e8f7dc4db5532fb6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400022, guid: 69c3ed15e9d13481e8f7dc4db5532fb6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 69c3ed15e9d13481e8f7dc4db5532fb6, type: 3}
@@ -725,7 +729,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.7537589, y: 1, z: 10.345395}
+  m_Size: {x: 1.7537589, y: 5, z: 10.345395}
   m_Center: {x: -0.37687945, y: 0, z: -4.6726985}
 --- !u!4 &1104292961
 Transform:
@@ -741,6 +745,54 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1245235228
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1245235229}
+  - component: {fileID: 1245235230}
+  m_Layer: 0
+  m_Name: Abilities Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1245235229
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245235228}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1245235230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245235228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76ef2f684c9010e4eaedbfaf269858ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointSystem: {fileID: 2058873469}
+  unityChan: {fileID: 2129226473}
+  secondsToEnableJumping: 10
+  secondsToEnableSliding: 15
+  secondsToEnableAttack: 20
 --- !u!1 &1310681320
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,7 +851,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.7537589, y: 1, z: 10.345395}
+  m_Size: {x: 1.7537589, y: 5, z: 10.345395}
   m_Center: {x: -0.37687945, y: 0, z: -4.6726985}
 --- !u!4 &1314961280
 Transform:
@@ -1039,6 +1091,52 @@ MonoBehaviour:
   planeOriginLocation: {fileID: 713558499}
   planeEndLocation: {fileID: 1310681321}
   speed: 8
+--- !u!1 &2058873467
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2058873468}
+  - component: {fileID: 2058873469}
+  m_Layer: 0
+  m_Name: Point System
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2058873468
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058873467}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2058873469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058873467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba76c8f11c2a9ee49b95fecc62d3e8d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plane: {fileID: 1016660602}
+  unityChan: {fileID: 2129226473}
+  secondsRunning: 0
 --- !u!1 &2129226463 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100076, guid: 69c3ed15e9d13481e8f7dc4db5532fb6, type: 3}
@@ -1063,3 +1161,7 @@ MonoBehaviour:
   rotateSpeed: 2
   jumpPower: 3
   animSpeed: 1.5
+  jumpParam: Jump
+  slideParam: Slide
+  attackParam: Attack
+  deathParam: Collision

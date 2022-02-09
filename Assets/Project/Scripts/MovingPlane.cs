@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class MovingPlane : MonoBehaviour
 {
-
     [SerializeField] private Transform planeOriginLocation;
     [SerializeField] private Transform planeEndLocation;
-    [SerializeField] private float speed;
+    public float speed;
     private Vector3 velocity;
     private Vector3 direction;    
 
@@ -19,14 +18,12 @@ public class MovingPlane : MonoBehaviour
     {
         direction = transform.forward * -1;
     }
-
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         MovePlaneTowardsPlayer();
         ResetPositionWhenReaching(planeEndLocation.position);
     }
-
     private void MovePlaneTowardsPlayer()
     {
         velocity = direction;
