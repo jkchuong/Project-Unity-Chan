@@ -180,8 +180,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: JIMMY - Principal Programmer, CEO, Creative Director, Producer, Marketing
-    Strategist, Lead Game Designer, Lead Game Developer, Lead Audio Engineer
+  m_text: '- LKasmodeus: Underpaid Game Developer, obsessed with dangos
+
+    - Bytie:
+    Principal artist and 3D Director, always looking for a fight.
+
+    - Jimmy:
+    Budget version of Shiro.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -276,7 +281,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &236852586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,11 +420,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'LORENZO: 0
-
-    DIANA: 1
-
-    JiMMY: 19999'
+  m_text: "LKasmodeus: 10/10\r\nBytie: 7.2 \nJimmy: - \u221E (for confectionary sprint) "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -429,7 +430,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.9528302, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -713,7 +714,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00091552734, y: 389}
+  m_AnchoredPosition: {x: -0.0009765625, y: 389}
   m_SizeDelta: {x: -1331.5, y: -915.95}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &546044289
@@ -811,9 +812,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Lorenzo - Junior Programmer
-
-    Diana - Artist'
+  m_text: 'Honorable mentions: Shiro, Bytie''s little sister, Jimmy'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -823,7 +822,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -925,7 +924,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00091552734, y: -0.00079345703}
+  m_AnchoredPosition: {x: -0.0009765625, y: -0.00079345703}
   m_SizeDelta: {x: -671.16, y: -533.07}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &768391837
@@ -1133,7 +1132,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0022583, y: 406}
+  m_AnchoredPosition: {x: 0.0021972656, y: 406}
   m_SizeDelta: {x: -1342.4, y: -935.82}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1081707834
@@ -1354,7 +1353,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000061035156, y: -29.284973}
+  m_AnchoredPosition: {x: 0, y: -29.284973}
   m_SizeDelta: {x: -671.0392, y: -526.01}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1510726443
@@ -1859,7 +1858,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1927379797
 MonoBehaviour:
   m_ObjectHideFlags: 0
