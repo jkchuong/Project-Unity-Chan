@@ -10,14 +10,6 @@ public class CinematicManager : MonoBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera startingCamera;
     [SerializeField] private CinemachineVirtualCamera playCamera;
-    
-    private Button startButton;
-    
-    private void Start()
-    {
-        startButton = GameObject.Find("Start Button").GetComponent<Button>();
-        startButton.onClick.AddListener(PlayStartSequence);
-    }
 
     public void PlayStartSequence()
     {

@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Project/Scenes/UI.unity
-    guid: c3f2236169075434d8a49e1c0f515039
+    path: Assets/Project/Scenes/Locomotion.unity
+    guid: 957eefe92df624143ad9333b8bc01eb8
   - enabled: 1
     path: Assets/Project/Scenes/Environment.unity
     guid: b40f193853a78194b9ca574d2bc2b622
@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Project/Scenes/Spawning Obstacles.unity
     guid: 574bfb0850a6ac443a2f7062c61eb887
   - enabled: 1
-    path: Assets/Project/Scenes/Locomotion.unity
-    guid: 957eefe92df624143ad9333b8bc01eb8
+    path: Assets/Project/Scenes/UI.unity
+    guid: c3f2236169075434d8a49e1c0f515039
   m_configObjects: {}
