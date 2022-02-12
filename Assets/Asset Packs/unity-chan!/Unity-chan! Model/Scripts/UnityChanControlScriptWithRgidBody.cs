@@ -85,7 +85,7 @@ namespace UnityChan
 			velocity = transform.TransformDirection (velocity);
 			//以下のvの閾値は、Mecanim側のトランジションと一緒に調整する
 			if (v > 0.1) {
-				velocity *= forwardSpeed;		// 移動速度を掛ける
+				velocity = new Vector3(forwardSpeed, 0, 0);		// 移動速度を掛ける
 			} else if (v < -0.1) {
 				velocity *= backwardSpeed;	// 移動速度を掛ける
 			}
@@ -93,13 +93,13 @@ namespace UnityChan
 			if (Input.GetButtonDown ("Jump")) {	// スペースキーを入力したら
 
 				//アニメーションのステートがLocomotionの最中のみジャンプできる
-				if (currentBaseState.nameHash == locoState) {
+				//if (currentBaseState.nameHash == locoState) {
 					//ステート遷移中でなかったらジャンプできる
-					if (!anim.IsInTransition (0)) {
+					//if (!anim.IsInTransition (0)) {
 						rb.AddForce (Vector3.up * jumpPower, ForceMode.VelocityChange);
 						anim.SetBool ("Jump", true);		// Animatorにジャンプに切り替えるフラグを送る
-					}
-				}
+					//}
+				//}
 			}
 		
 
@@ -107,7 +107,7 @@ namespace UnityChan
 			transform.localPosition += velocity * Time.fixedDeltaTime;
 
 			// 左右のキー入力でキャラクタをY軸で旋回させる
-			transform.Rotate (0, h * rotateSpeed, 0);	
+			transform.Rotate (0, h * v, 0);	
 	
 
 			// 以下、Animatorの各ステート中での処理
