@@ -211,11 +211,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 112652233}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45d4d5551285baa4d9063242f941fd12, type: 3}
+  m_Script: {fileID: 11500000, guid: 280adc8b9ceabbb439dadc48083a657c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingCamera: {fileID: 787570716}
-  playCamera: {fileID: 446772143}
+  startingCamera: {fileID: 446772143}
+  playCamera: {fileID: 787570716}
 --- !u!320 &112652235
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -234,7 +234,7 @@ PlayableDirector:
   - key: {fileID: -7762641221186977577, guid: 5afe45e7032dbf04fa953b9a9afd96a3, type: 2}
     value: {fileID: 194876238}
   - key: {fileID: -7762641221186977577, guid: 9e1002beecc1b58498b519e2022d275d, type: 2}
-    value: {fileID: 0}
+    value: {fileID: 194876238}
   m_ExposedReferences:
     m_References:
     - 95f5d0ead7ccb274d9023ac5d448d838: {fileID: 446772143}
