@@ -8,7 +8,7 @@ public class PointSystem : MonoBehaviour
 {
     [SerializeField] private ScoresScriptableObject scoresScriptableObject;
     
-    public MovingPlane plane; // get a plane for speed information so no magic numbers
+    public ScrollingBackground plane; // get a plane for speed information so no magic numbers
     public UnityChanControlScript unityChan; // get unity-chan alive status    
     public float secondsRunning;
 
@@ -44,7 +44,7 @@ public class PointSystem : MonoBehaviour
     // calculates the distance ran base on plane speed and seconds alive
     private float CalculateDistanceRan()
     {
-        Distance = secondsRunning * plane.speed; // assuming plane speed is in m/s (also remember unitychan doesn't move only the plane)
+        Distance = secondsRunning * plane.scrollSpeed; // assuming plane speed is in m/s (also remember unitychan doesn't move only the plane)
 
         #if UNITY_EDITOR
         Debug.Log($"Distance ran: {Distance}");

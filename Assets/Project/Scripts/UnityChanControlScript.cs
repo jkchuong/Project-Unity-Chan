@@ -78,7 +78,7 @@ namespace UnityChan
             if (startButton)
             {
                 startButton.onClick.AddListener(delegate { isGameRunning = true; });
-                // startButton.onClick.AddListener(delegate { anim.SetBool(RUNNING, true); });
+                startButton.onClick.AddListener(SetRunningStateTrue);
             }
         }
 
@@ -92,6 +92,16 @@ namespace UnityChan
         private void FixedUpdate()
         {
             SidewaysMovement();
+        }
+
+        public void SetRunningStateTrue()
+        {
+            anim.SetBool(RUNNING, true);
+        }
+        
+        public void SetRunningStateFalse()
+        {
+            anim.SetBool(RUNNING, false);
         }
 
         #region Functions for calling dictionary action depending on player input

@@ -34,7 +34,7 @@ namespace Assets.Project.Scripts.Obstacles
         }
 
 
-        private void BeginObstacleSpawning()
+        public void BeginObstacleSpawning()
         {
             randomSpawningCoroutine = StartCoroutine(RandomSpawning(1));
         }
