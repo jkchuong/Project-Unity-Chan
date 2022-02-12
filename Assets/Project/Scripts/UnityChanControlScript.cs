@@ -21,7 +21,7 @@ namespace UnityChan
         #region Fields
         public bool IsDead { get; set; }
 
-        private bool isGameRunning = false;
+        public bool isGameRunning = false;
         private Rigidbody rb;
         private Animator anim;
         private Vector3 velocity;
@@ -43,10 +43,14 @@ namespace UnityChan
         [HideInInspector] public string DEATH_PARAM = "Collision";
         [HideInInspector] public string SPEED_PARAM = "Speed";
         [HideInInspector] public string DIRECTION_PARAM = "Direction";
+        [HideInInspector] public string RUNNING = "Running";
+        
 
         // dictionary that binds the animator parameter and the ability model
         public Dictionary<string, Ability> animationStates;      
         #endregion
+
+        public event Action OnDeath;
 
         private void Start()
         {
@@ -70,7 +74,12 @@ namespace UnityChan
             };
 
             startButton = GameObject.Find("Start Button").GetComponent<Button>();
-            startButton.onClick.AddListener(delegate { isGameRunning = true; });
+
+            if (startButton)
+            {
+                startButton.onClick.AddListener(delegate { isGameRunning = true; });
+                startButton.onClick.AddListener(SetRunningStateTrue);
+            }
         }
 
         private void Update()
@@ -83,6 +92,16 @@ namespace UnityChan
         private void FixedUpdate()
         {
             SidewaysMovement();
+        }
+
+        public void SetRunningStateTrue()
+        {
+            anim.SetBool(RUNNING, true);
+        }
+        
+        public void SetRunningStateFalse()
+        {
+            anim.SetBool(RUNNING, false);
         }
 
         #region Functions for calling dictionary action depending on player input
@@ -149,6 +168,9 @@ namespace UnityChan
         private void DeathControls()
         {
             anim.SetTrigger(DEATH_PARAM);
+            anim.SetBool(RUNNING, false);
+            isGameRunning = false;
+            OnDeath?.Invoke();
         }
         #endregion
 
@@ -168,7 +190,7 @@ namespace UnityChan
             velocity = transform.TransformDirection(velocity);
             velocity *= leftRightSpeed;
             transform.localPosition += velocity * Time.fixedDeltaTime;
-        }        
+        }
         #endregion
     }
 }

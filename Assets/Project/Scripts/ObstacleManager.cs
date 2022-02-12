@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using UnityChan;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Assets.Project.Scripts.Obstacles
 {
@@ -14,6 +17,8 @@ namespace Assets.Project.Scripts.Obstacles
         #endregion
         
         private Button startButton;
+        private UnityChanControlScript unityChan;
+        private Coroutine randomSpawningCoroutine;
 
         private void Start()
         {
@@ -23,12 +28,20 @@ namespace Assets.Project.Scripts.Obstacles
             
             startButton = GameObject.Find("Start Button").GetComponent<Button>();
             startButton.onClick.AddListener(BeginObstacleSpawning);
+
+            unityChan = FindObjectOfType<UnityChanControlScript>();
+            unityChan.OnDeath += StopObstacleSpawning;
         }
 
 
-        private void BeginObstacleSpawning()
+        public void BeginObstacleSpawning()
         {
-            StartCoroutine(RandomSpawning(1));
+            randomSpawningCoroutine = StartCoroutine(RandomSpawning(1));
+        }
+
+        private void StopObstacleSpawning()
+        {
+            StopCoroutine(randomSpawningCoroutine);
         }
 
         // random spawn coroutine function that changes the spawn rate every time
@@ -77,11 +90,14 @@ namespace Assets.Project.Scripts.Obstacles
                     return true;
                 }                    
             }
-            #if UNITY_EDITOR
-                Debug.LogWarning("No available obstacle to get");
-            #endif
 
             return false;
+        }
+
+        private void OnDisable()
+        {
+            startButton.onClick.RemoveListener(BeginObstacleSpawning);
+            unityChan.OnDeath -= StopObstacleSpawning;
         }
     }
 }
