@@ -8,7 +8,7 @@ namespace Assets.Project.Scripts.Obstacles
     {
         #region Fields
         [SerializeField] private Transform obstacleOriginLocation; // parent position
-        [SerializeField] private float maxLifetime = 100; // in seconds
+        [SerializeField] private float maxLifetime = 30; // in seconds
         [SerializeField] private float obstacleSpeed = 10.0f;
         [SerializeField] private float minObjSpeed = 5f;
         [SerializeField] private float maxObjSpeed = 10f;
@@ -30,7 +30,6 @@ namespace Assets.Project.Scripts.Obstacles
         private void Start()
         {
             direction = transform.forward * -1;
-
         }
 
         // Update is called once per frame
@@ -38,7 +37,7 @@ namespace Assets.Project.Scripts.Obstacles
         {
             // obstacle always moving
             Move();
-            
+
             // when out of life reset it
             lifetime += Time.deltaTime;
             if (lifetime > maxLifetime)
@@ -60,7 +59,7 @@ namespace Assets.Project.Scripts.Obstacles
         // resets this obstacle from a random delta from origin position
         public void ResetObstacle()
         {            
-            var randomDeltaPosition = new Vector3(Random.Range(-5f, 5f), Random.Range(0f, 1.0f), Random.Range(0f, 2.0f)); ; //height,sides,towardsYou
+            var randomDeltaPosition = new Vector3(Random.Range(-5f, 5f), Random.Range(0f, 0f), Random.Range(0f, 2.0f)); ; //height,sides,towardsYou
             var randomObjSpeed = Random.Range(minObjSpeed, maxObjSpeed)  * (1 + (Time.timeSinceLevelLoad * speedIncreaseFactor));
 
             lifetime = 0;

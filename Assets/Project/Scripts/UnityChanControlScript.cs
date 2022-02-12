@@ -164,7 +164,7 @@ namespace UnityChan
             anim.SetTrigger(ATTACK_PARAM);            
         }
 
-        private void DeathControls()
+        public void DeathControls()
         {
             anim.SetTrigger(DEATH_PARAM);
             anim.SetBool(RUNNING, false);
