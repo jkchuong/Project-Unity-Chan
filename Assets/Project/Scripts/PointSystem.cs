@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityChan;
@@ -5,6 +6,8 @@ using UnityEngine;
 
 public class PointSystem : MonoBehaviour
 {
+    [SerializeField] private ScoresScriptableObject scoresScriptableObject;
+    
     public MovingPlane plane; // get a plane for speed information so no magic numbers
     public UnityChanControlScript unityChan; // get unity-chan alive status    
     public float secondsRunning;
@@ -21,19 +24,21 @@ public class PointSystem : MonoBehaviour
         secondsRunning = 0;
     }
 
+    private void Start()
+    {
+       unityChan = FindObjectOfType<UnityChanControlScript>();
+
+        if (unityChan)
+        {
+            unityChan.OnDeath += CalculatePoints;
+        }
+    }
+
     // Update is called once per frame
     private void Update()
     {
         // keep updating till death
         secondsRunning += Time.deltaTime;
-
-        // calculate points and distance when dead
-        if (unityChan.IsDead)
-        {
-            CalculateDistanceRan();
-            CalculatePoints();
-            // ResetSeconds();
-        }
     }
 
     // calculates the distance ran base on plane speed and seconds alive
@@ -48,8 +53,13 @@ public class PointSystem : MonoBehaviour
         return Distance; 
     }
 
+    private void OnDisable()
+    {
+        unityChan.OnDeath -= CalculatePoints;
+    }
+
     // Handles point calculation
-    private float CalculatePoints()
+    private void CalculatePoints()
     {
         // TO DO: define how to award/calculate points (as we attack too, and maybe in the future we have consumables mixed along with obstacles)
         float obstaclesKilled = 5;
@@ -64,6 +74,6 @@ public class PointSystem : MonoBehaviour
         Debug.Log($"Points obtained on this run: {Points}");
         #endif
 
-        return Points;
+        scoresScriptableObject.playerScore.Add(Points);
     }
 }

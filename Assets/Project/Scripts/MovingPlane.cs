@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityChan;
 using UnityEngine;
 
 public class MovingPlane : MonoBehaviour
@@ -8,7 +9,10 @@ public class MovingPlane : MonoBehaviour
     [SerializeField] private Transform planeEndLocation;
     public float speed;
     private Vector3 velocity;
-    private Vector3 direction;    
+    private Vector3 direction;
+    private bool isMoving = true;
+
+    private UnityChanControlScript unityChan;
 
     public void ActivateThis() => gameObject.SetActive(true);
     public void DeactivateThis() => gameObject.SetActive(false);
@@ -17,10 +21,17 @@ public class MovingPlane : MonoBehaviour
     void Start()
     {
         direction = transform.forward * -1;
+
+        unityChan = FindObjectOfType<UnityChanControlScript>();
+        if (unityChan)
+        {
+            unityChan.OnDeath += delegate { isMoving = false; };
+        }
     }
     // Update is called once per frame
     private void Update()
     {
+        if (!isMoving) return;
         MovePlaneTowardsPlayer();
         ResetPositionWhenReaching(planeEndLocation.position);
     }
