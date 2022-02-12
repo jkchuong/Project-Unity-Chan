@@ -19,8 +19,7 @@ namespace UnityChan
     public class UnityChanControlScript : MonoBehaviour
     {
         #region Fields
-        public bool IsDead { get; set; }
-
+        
         public bool isGameRunning = false;
         private Rigidbody rb;
         private Animator anim;
