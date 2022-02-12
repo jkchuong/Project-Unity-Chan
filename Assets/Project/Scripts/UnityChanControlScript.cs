@@ -19,8 +19,7 @@ namespace UnityChan
     public class UnityChanControlScript : MonoBehaviour
     {
         #region Fields
-        public bool IsDead { get; set; }
-
+        
         public bool isGameRunning = false;
         private Rigidbody rb;
         private Animator anim;
@@ -170,6 +169,13 @@ namespace UnityChan
             anim.SetTrigger(DEATH_PARAM);
             anim.SetBool(RUNNING, false);
             isGameRunning = false;
+
+            foreach (KeyValuePair<string, Ability> ability in animationStates)
+            {
+                if (ability.Key == DEATH_PARAM) continue;
+                ability.Value.IsEnabled = false;
+            }
+
             OnDeath?.Invoke();
         }
         #endregion

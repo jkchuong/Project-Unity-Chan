@@ -19,7 +19,7 @@ public class CinematicManager : MonoBehaviour
         startButton.onClick.AddListener(PlayStartSequence);
     }
 
-    private void PlayStartSequence()
+    public void PlayStartSequence()
     {
         GetComponent<PlayableDirector>().Play();
         playCamera.Priority = 10;

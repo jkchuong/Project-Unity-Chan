@@ -31,6 +31,7 @@ public class PointSystem : MonoBehaviour
         if (unityChan)
         {
             unityChan.OnDeath += CalculatePoints;
+            unityChan.OnDeath += ResetSeconds;
         }
     }
 

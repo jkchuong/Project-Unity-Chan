@@ -13,12 +13,14 @@ public class DeathCanvas : MonoBehaviour
     private UnityChanControlScript unityChan;
     private ScrollingBackground movingPlane;
     private ObstacleManager obstacleManager;
+    private CinematicManager cinematicManager;
 
     private void Start()
     {
         unityChan = FindObjectOfType<UnityChanControlScript>();
         movingPlane = FindObjectOfType<ScrollingBackground>();
         obstacleManager = FindObjectOfType<ObstacleManager>();
+        cinematicManager = FindObjectOfType<CinematicManager>();
 
         if (unityChan)
         {
@@ -33,6 +35,7 @@ public class DeathCanvas : MonoBehaviour
         restartButton.onClick.AddListener(unityChan.SetRunningStateTrue);
         restartButton.onClick.AddListener(delegate { movingPlane.isMoving = true; });
         restartButton.onClick.AddListener(obstacleManager.BeginObstacleSpawning);
+        restartButton.onClick.AddListener(cinematicManager.PlayStartSequence);
     }
 
     private void DisplayDeathButtons()
