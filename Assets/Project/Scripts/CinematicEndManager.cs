@@ -12,6 +12,8 @@ public class CinematicEndManager : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera playCamera;
 
     private UnityChanControlScript unityChan;
+    
+    
     private void Start()
     {
         unityChan = FindObjectOfType<UnityChanControlScript>();
