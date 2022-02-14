@@ -26,8 +26,6 @@ namespace UnityChan
         private Vector3 velocity;
         private float horizontalInput;
         private float verticalInput = 1;
-        
-        private Button startButton;
 
         [SerializeField] private float leftRightSpeed = 7.0f;
         [SerializeField] private float jumpPower = 5.0f;
@@ -71,14 +69,6 @@ namespace UnityChan
                 {ATTACK_PARAM, attackAbility},
                 {DEATH_PARAM, abilityToDie}
             };
-
-            startButton = GameObject.Find("Start Button").GetComponent<Button>();
-
-            if (startButton)
-            {
-                startButton.onClick.AddListener(delegate { isGameRunning = true; });
-                startButton.onClick.AddListener(SetRunningStateTrue);
-            }
         }
 
         private void Update()
