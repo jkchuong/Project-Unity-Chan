@@ -14,6 +14,7 @@ namespace Assets.Project.Scripts.Obstacles
         [SerializeField] private float maxObjSpeed = 10f;
         [SerializeField] private float speedIncreaseFactor = 0.003f;
 
+        public float timeGameBegan;
         private float lifetime;
         private Vector3 velocity;
         private Vector3 direction;
@@ -60,7 +61,7 @@ namespace Assets.Project.Scripts.Obstacles
         public void ResetObstacle()
         {            
             var randomDeltaPosition = new Vector3(Random.Range(-5f, 5f), Random.Range(0f, 0f), Random.Range(0f, 2.0f)); ; //height,sides,towardsYou
-            var randomObjSpeed = Random.Range(minObjSpeed, maxObjSpeed)  * (1 + (Time.timeSinceLevelLoad * speedIncreaseFactor));
+            var randomObjSpeed = Random.Range(minObjSpeed, maxObjSpeed)  * (1 + ((Time.time - timeGameBegan) * speedIncreaseFactor));
 
             lifetime = 0;
             gameObject.transform.position = obstacleOriginLocation.position + randomDeltaPosition;

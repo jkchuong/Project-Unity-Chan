@@ -15,7 +15,8 @@ namespace Assets.Project.Scripts.Obstacles
         [SerializeField] private float lowestSpawnRate;
         [SerializeField] private float initialSpawnDelay = 5f;
         #endregion
-        
+
+        private float timeGameBegan;
         private Button startButton;
         private UnityChanControlScript unityChan;
         private Coroutine randomSpawningCoroutine;
@@ -36,6 +37,7 @@ namespace Assets.Project.Scripts.Obstacles
 
         public void BeginObstacleSpawning()
         {
+            timeGameBegan = Time.time;
             randomSpawningCoroutine = StartCoroutine(RandomSpawning(1));
         }
 
@@ -74,6 +76,7 @@ namespace Assets.Project.Scripts.Obstacles
 
                 var freeObstacle = allObstacles[refFreeObstacle].GetComponent<Obstacle>();
                 freeObstacle.ResetObstacle();
+                freeObstacle.timeGameBegan = timeGameBegan;
                 freeObstacle.ActivateThis();
             }             
         }
