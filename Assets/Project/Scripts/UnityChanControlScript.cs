@@ -30,6 +30,8 @@ namespace UnityChan
         [SerializeField] private float leftRightSpeed = 7.0f;
         [SerializeField] private float jumpPower = 5.0f;
         [SerializeField] private float animSpeed = 1.5f;
+        [SerializeField] private GameObject spawnPosition;
+        [SerializeField] private GameObject explosionPrefab;
         #endregion
 
         #region Ability fields
@@ -168,6 +170,19 @@ namespace UnityChan
 
             OnDeath?.Invoke();
         }
+        
+        // Animation Event
+        public void MovePlayerToOrigin()
+        {
+            gameObject.transform.position = spawnPosition.transform.position;
+        }
+        
+        //Animation Event
+        public void PlayParticleEffect()
+        {
+            GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        }
+        
         #endregion
 
         #region Other
