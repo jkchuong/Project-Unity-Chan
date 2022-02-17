@@ -12,11 +12,14 @@ public class DeathCanvas : MonoBehaviour
 
     private UnityChanControlScript unityChan;
     private ScrollingBackground movingPlane;
+    private RollingDonut[] rollingDonuts;
     private ObstacleManager obstacleManager;
     private CinematicManager cinematicManager;
 
     private void Start()
     {
+        rollingDonuts = FindObjectsOfType<RollingDonut>();
+        
         unityChan = FindObjectOfType<UnityChanControlScript>();
         movingPlane = FindObjectOfType<ScrollingBackground>();
         obstacleManager = FindObjectOfType<ObstacleManager>();
@@ -29,11 +32,11 @@ public class DeathCanvas : MonoBehaviour
         
         menuButton.onClick.AddListener(delegate { unityChan.isGameRunning = false; });
         menuButton.onClick.AddListener(unityChan.SetRunningStateTrue);
-        menuButton.onClick.AddListener(delegate { movingPlane.isMoving = true; });
+        menuButton.onClick.AddListener(StartRollingAndPlane);
         
         restartButton.onClick.AddListener(delegate { unityChan.isGameRunning = true; });
         restartButton.onClick.AddListener(unityChan.SetRunningStateTrue);
-        restartButton.onClick.AddListener(delegate { movingPlane.isMoving = true; });
+        restartButton.onClick.AddListener(StartRollingAndPlane);
         restartButton.onClick.AddListener(obstacleManager.BeginObstacleSpawning);
         restartButton.onClick.AddListener(cinematicManager.PlayStartSequence);
     }
@@ -44,12 +47,21 @@ public class DeathCanvas : MonoBehaviour
         restartButton.gameObject.SetActive(true);
     }
 
+    private void StartRollingAndPlane()
+    {
+        foreach (RollingDonut donut in rollingDonuts)
+        {
+            donut.isMoving = true;
+        }
+
+        movingPlane.isMoving = true;
+    }
+    
     private void OnDisable()
     {
         unityChan.OnDeath -= DisplayDeathButtons;
-        menuButton.onClick.RemoveListener(delegate { unityChan.isGameRunning = false; });
-        menuButton.onClick.RemoveListener(unityChan.SetRunningStateTrue);
-        restartButton.onClick.RemoveListener(delegate { unityChan.isGameRunning = true; });
-        restartButton.onClick.RemoveListener(unityChan.SetRunningStateTrue);
+        
+        menuButton.onClick.RemoveAllListeners();
+        restartButton.onClick.RemoveAllListeners();
     }
 }
