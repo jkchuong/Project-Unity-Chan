@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityChan;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +9,7 @@ using UnityEngine.UI;
 public class StartCanvas : MonoBehaviour
 {
     [SerializeField] private Button startButton, scoreButton, creditsButton;
-
+    
     private CinematicManager cinematicManager;
     private UnityChanControlScript unityChan;
 
@@ -29,16 +30,24 @@ public class StartCanvas : MonoBehaviour
 
     public void DisplayStartButtons()
     {
-        startButton.gameObject.SetActive(true);
-        scoreButton.gameObject.SetActive(true);
-        creditsButton.gameObject.SetActive(true);
+        Button[] buttons = { startButton, scoreButton, creditsButton };
+
+        foreach (Button button in buttons)
+        {
+            button.transform.DOScale(Vector3.one, 0.3f)
+                .SetEase(Ease.InBounce);
+        }
     }
 
     private void HideStartButtons()
     {
-        startButton.gameObject.SetActive(false);
-        scoreButton.gameObject.SetActive(false);
-        creditsButton.gameObject.SetActive(false);
+        Button[] buttons = { startButton, scoreButton, creditsButton };
+
+        foreach (Button button in buttons)
+        {
+            button.transform.DOScale(Vector3.zero, 0.3f)
+                .SetEase(Ease.InBounce);
+        }
     }
 
     private void OnDisable()

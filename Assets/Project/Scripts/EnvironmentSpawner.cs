@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using UnityChan;
 using UnityEngine;
@@ -42,7 +41,6 @@ public class EnvironmentSpawner : MonoBehaviour
     {
         int randomSpawnPosition = Random.Range(0, 2);
         int randomPrefab = Random.Range(0, NumberOfPrefabs);
-        Debug.Log(randomPrefab);
         GameObject spawnedEnv = Instantiate(environmentPrefabs[randomPrefab], spawnPositions[randomSpawnPosition]);
         spawnedEnv.transform.DOMoveZ(endPositions[randomSpawnPosition].position.z, timeToMoveFullPath).SetEase(Ease.Linear)
             .OnComplete(delegate { Destroy(spawnedEnv); });
