@@ -15,10 +15,12 @@ public class DeathCanvas : MonoBehaviour
     private RollingDonut[] rollingDonuts;
     private ObstacleManager obstacleManager;
     private CinematicManager cinematicManager;
+    private EnvironmentSpawner environmentSpawner;
 
     private void Start()
     {
         rollingDonuts = FindObjectsOfType<RollingDonut>();
+        environmentSpawner = FindObjectOfType<EnvironmentSpawner>();
         
         unityChan = FindObjectOfType<UnityChanControlScript>();
         movingPlane = FindObjectOfType<ScrollingBackground>();
@@ -55,6 +57,7 @@ public class DeathCanvas : MonoBehaviour
         }
 
         movingPlane.isMoving = true;
+        environmentSpawner.isMoving = true;
     }
     
     private void OnDisable()
