@@ -53,11 +53,6 @@ namespace Assets.Project.Scripts.Obstacles
             while (true)
             {
                 SpawnObstacle();
-
-                #if UNITY_EDITOR
-                    Debug.Log($"Spawning every {spawnInterval}s");
-                #endif                
-                
                 spawnInterval = Random.Range(fastestSpawnRate, lowestSpawnRate);
                 yield return new WaitForSeconds(spawnInterval);
             }            
@@ -69,11 +64,6 @@ namespace Assets.Project.Scripts.Obstacles
             int refFreeObstacle = -1;
             if (TryGetAvailableObstacle(out refFreeObstacle))
             {
-
-                #if UNITY_EDITOR
-                    Debug.Log("Spawning");
-                #endif
-
                 var freeObstacle = allObstacles[refFreeObstacle].GetComponent<Obstacle>();
                 freeObstacle.ResetObstacle();
                 freeObstacle.timeGameBegan = timeGameBegan;

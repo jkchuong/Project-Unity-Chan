@@ -1,4 +1,5 @@
 using System;
+using UnityChan;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -66,6 +67,12 @@ namespace Assets.Project.Scripts.Obstacles
             lifetime = 0;
             gameObject.transform.position = obstacleOriginLocation.position + randomDeltaPosition;
             obstacleSpeed = randomObjSpeed;
-        }        
+        }
+
+        private void OnCollisionEnter(Collision other)
+        {
+            if (!other.gameObject.GetComponent<UnityChanControlScript>()) return;
+            FindObjectOfType<CinemachineShake>().ShakeCamera();
+        }
     }
 }
