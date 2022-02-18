@@ -1,15 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Assets.Project.Scripts.Obstacles;
+using TMPro;
 using UnityChan;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DeathCanvas : MonoBehaviour
 {
+    [SerializeField] private TMP_Text scoreText;
     [SerializeField] private Button menuButton, restartButton;
-
+    [SerializeField] private ScoresScriptableObject scoresScriptableObject;
+    
     private UnityChanControlScript unityChan;
     private ScrollingBackground movingPlane;
     private RollingDonut[] rollingDonuts;
@@ -29,7 +33,7 @@ public class DeathCanvas : MonoBehaviour
 
         if (unityChan)
         {
-            unityChan.OnDeath += DisplayDeathButtons;
+            unityChan.OnDeath += DisplayDeathCanvas;
         }
         
         menuButton.onClick.AddListener(delegate { unityChan.isGameRunning = false; });
@@ -41,12 +45,19 @@ public class DeathCanvas : MonoBehaviour
         restartButton.onClick.AddListener(StartRollingAndPlane);
         restartButton.onClick.AddListener(obstacleManager.BeginObstacleSpawning);
         restartButton.onClick.AddListener(cinematicManager.PlayStartSequence);
+        
+        menuButton.gameObject.SetActive(false);
+        restartButton.gameObject.SetActive(false);
+        scoreText.gameObject.SetActive(false);
     }
 
-    private void DisplayDeathButtons()
+    private void DisplayDeathCanvas()
     {
+        scoreText.gameObject.SetActive(true);
         menuButton.gameObject.SetActive(true);
         restartButton.gameObject.SetActive(true);
+
+        scoreText.text = "Score: " + scoresScriptableObject.playerScore.LastOrDefault();
     }
 
     private void StartRollingAndPlane()
@@ -62,7 +73,7 @@ public class DeathCanvas : MonoBehaviour
     
     private void OnDisable()
     {
-        unityChan.OnDeath -= DisplayDeathButtons;
+        unityChan.OnDeath -= DisplayDeathCanvas;
         
         menuButton.onClick.RemoveAllListeners();
         restartButton.onClick.RemoveAllListeners();
