@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 // Should've used a generic canvas script
 public class ScoreCanvas : MonoBehaviour
@@ -14,23 +15,25 @@ public class ScoreCanvas : MonoBehaviour
     
     private void Start()
     {
+        scores = GetComponentInChildren<Scores>();
+        
+        backButton.GetComponent<Button>().onClick.AddListener(HideScoreCanvas);
+        
         foreach (GameObject canvasObject in canvasObjects)
         {
             canvasObject.transform.localScale = Vector3.zero;
         }
-
-        scores = GetComponentInChildren<Scores>();
     }
 
     public void DisplayScoreCanvas()
     {
-        scores.UpdateScores();
-
         foreach (GameObject canvasObject in canvasObjects)
         {
             canvasObject.transform.DOScale(Vector3.one, 0.3f)
                 .SetEase(Ease.InBounce);
         }
+        
+        scores.UpdateScores();
     }
     
     public void HideScoreCanvas()
