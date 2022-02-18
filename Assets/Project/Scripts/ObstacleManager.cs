@@ -26,9 +26,6 @@ namespace Assets.Project.Scripts.Obstacles
             // init random spawning coroutine
             fastestSpawnRate = 0.2f;
             lowestSpawnRate = 1f;
-            
-            startButton = GameObject.Find("Start Button").GetComponent<Button>();
-            startButton.onClick.AddListener(BeginObstacleSpawning);
 
             unityChan = FindObjectOfType<UnityChanControlScript>();
             unityChan.OnDeath += StopObstacleSpawning;
@@ -89,7 +86,6 @@ namespace Assets.Project.Scripts.Obstacles
 
         private void OnDisable()
         {
-            startButton.onClick.RemoveListener(BeginObstacleSpawning);
             unityChan.OnDeath -= StopObstacleSpawning;
         }
     }
