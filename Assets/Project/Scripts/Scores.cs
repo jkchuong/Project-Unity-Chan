@@ -15,12 +15,12 @@ public class Scores : MonoBehaviour
         scoresText = GetComponent<TextMeshProUGUI>();
     }
 
-    private void OnEnable()
+    public void UpdateScores()
     {
         scoresText.text = "";
         foreach (int score in scores.playerScore)
         {
-            scoresText.text += score + ", ";
+            scoresText.text += score + "\n";
         }
     }
 }

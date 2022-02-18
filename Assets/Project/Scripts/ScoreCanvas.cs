@@ -9,6 +9,7 @@ public class ScoreCanvas : MonoBehaviour
 {
     [SerializeField] private GameObject titlePanel, scoresPanel, backButton;
 
+    private Scores scores;
     private IEnumerable<GameObject> canvasObjects => new[] { titlePanel, scoresPanel, backButton };
     
     private void Start()
@@ -17,10 +18,14 @@ public class ScoreCanvas : MonoBehaviour
         {
             canvasObject.transform.localScale = Vector3.zero;
         }
+
+        scores = GetComponentInChildren<Scores>();
     }
 
     public void DisplayScoreCanvas()
     {
+        scores.UpdateScores();
+
         foreach (GameObject canvasObject in canvasObjects)
         {
             canvasObject.transform.DOScale(Vector3.one, 0.3f)
