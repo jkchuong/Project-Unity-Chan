@@ -39,12 +39,14 @@ public class DeathCanvas : MonoBehaviour
         menuButton.onClick.AddListener(delegate { unityChan.isGameRunning = false; });
         menuButton.onClick.AddListener(unityChan.SetRunningStateTrue);
         menuButton.onClick.AddListener(StartRollingAndPlane);
+        menuButton.onClick.AddListener(HideDeathCanvas);
         
         restartButton.onClick.AddListener(delegate { unityChan.isGameRunning = true; });
         restartButton.onClick.AddListener(unityChan.SetRunningStateTrue);
         restartButton.onClick.AddListener(StartRollingAndPlane);
         restartButton.onClick.AddListener(obstacleManager.BeginObstacleSpawning);
         restartButton.onClick.AddListener(cinematicManager.PlayStartSequence);
+        restartButton.onClick.AddListener(HideDeathCanvas);
         
         menuButton.gameObject.SetActive(false);
         restartButton.gameObject.SetActive(false);
@@ -58,6 +60,13 @@ public class DeathCanvas : MonoBehaviour
         restartButton.gameObject.SetActive(true);
 
         scoreText.text = "Score: " + scoresScriptableObject.playerScore.LastOrDefault();
+    }
+
+    private void HideDeathCanvas()
+    {
+        scoreText.gameObject.SetActive(false);
+        menuButton.gameObject.SetActive(false);
+        restartButton.gameObject.SetActive(false);
     }
 
     private void StartRollingAndPlane()
