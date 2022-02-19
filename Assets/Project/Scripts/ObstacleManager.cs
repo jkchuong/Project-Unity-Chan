@@ -26,9 +26,6 @@ namespace Assets.Project.Scripts.Obstacles
             // init random spawning coroutine
             fastestSpawnRate = 0.2f;
             lowestSpawnRate = 1f;
-            
-            startButton = GameObject.Find("Start Button").GetComponent<Button>();
-            startButton.onClick.AddListener(BeginObstacleSpawning);
 
             unityChan = FindObjectOfType<UnityChanControlScript>();
             unityChan.OnDeath += StopObstacleSpawning;
@@ -53,11 +50,6 @@ namespace Assets.Project.Scripts.Obstacles
             while (true)
             {
                 SpawnObstacle();
-
-                #if UNITY_EDITOR
-                    Debug.Log($"Spawning every {spawnInterval}s");
-                #endif                
-                
                 spawnInterval = Random.Range(fastestSpawnRate, lowestSpawnRate);
                 yield return new WaitForSeconds(spawnInterval);
             }            
@@ -69,11 +61,6 @@ namespace Assets.Project.Scripts.Obstacles
             int refFreeObstacle = -1;
             if (TryGetAvailableObstacle(out refFreeObstacle))
             {
-
-                #if UNITY_EDITOR
-                    Debug.Log("Spawning");
-                #endif
-
                 var freeObstacle = allObstacles[refFreeObstacle].GetComponent<Obstacle>();
                 freeObstacle.ResetObstacle();
                 freeObstacle.timeGameBegan = timeGameBegan;
@@ -99,7 +86,6 @@ namespace Assets.Project.Scripts.Obstacles
 
         private void OnDisable()
         {
-            startButton.onClick.RemoveListener(BeginObstacleSpawning);
             unityChan.OnDeath -= StopObstacleSpawning;
         }
     }

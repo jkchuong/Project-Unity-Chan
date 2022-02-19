@@ -26,12 +26,14 @@ namespace UnityChan
         private Vector3 velocity;
         private float horizontalInput;
         private float verticalInput = 1;
+        private AudioSource audioSource;
 
         [SerializeField] private float leftRightSpeed = 7.0f;
         [SerializeField] private float jumpPower = 5.0f;
         [SerializeField] private float animSpeed = 1.5f;
         [SerializeField] private GameObject spawnPosition;
         [SerializeField] private GameObject explosionPrefab;
+        [SerializeField] private AudioClip explosionAudioClip;
         #endregion
 
         #region Ability fields
@@ -53,6 +55,7 @@ namespace UnityChan
 
         private void Start()
         {
+            audioSource = GetComponent<AudioSource>();
             anim = GetComponent<Animator>();
             rb = GetComponent<Rigidbody>();
 
@@ -181,6 +184,13 @@ namespace UnityChan
         public void PlayParticleEffect()
         {
             GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            PlayAudio(explosionAudioClip);
+        }
+
+        public void PlayAudio(AudioClip audioClip)
+        {
+            audioSource.clip = audioClip;
+            audioSource.Play();
         }
         
         #endregion

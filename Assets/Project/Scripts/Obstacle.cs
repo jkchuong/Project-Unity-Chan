@@ -1,12 +1,14 @@
-using System;
+using System.Collections.Generic;
+using UnityChan;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Assets.Project.Scripts.Obstacles
 {
     public class Obstacle : MonoBehaviour
     {
         #region Fields
+
+        [SerializeField] private List<AudioClip> hitAudioClips;
         [SerializeField] private Transform obstacleOriginLocation; // parent position
         [SerializeField] private float maxLifetime = 30; // in seconds
         [SerializeField] private float obstacleSpeed = 10.0f;
@@ -66,6 +68,15 @@ namespace Assets.Project.Scripts.Obstacles
             lifetime = 0;
             gameObject.transform.position = obstacleOriginLocation.position + randomDeltaPosition;
             obstacleSpeed = randomObjSpeed;
-        }        
+        }
+
+        private void OnCollisionEnter(Collision other)
+        {
+            if (other.gameObject.TryGetComponent(out UnityChanControlScript unityChan))
+            {
+                unityChan.PlayAudio(hitAudioClips[Random.Range(0, hitAudioClips.Count)]);
+                FindObjectOfType<CinemachineShake>().ShakeCamera();
+            }
+        }
     }
 }
