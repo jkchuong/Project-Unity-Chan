@@ -157,7 +157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0024414062, y: 75.41528}
+  m_AnchoredPosition: {x: 0.0025024414, y: 52.285004}
   m_SizeDelta: {x: -0.005, y: -150.8329}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &126711236
@@ -180,13 +180,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '- IKsamodeus: Underpaid Game Developer, obsessed with dangos
+  m_text: '- IKsamodeus: Underpaid Game Developer, obsessed with dangos (and still
+    couldn''t make a dango in 3D)
 
-    - Bytie:
-    Principal artist and 3D Director, always looking for a fight.
+    - Bytie: Principal artist and 3D Director,
+    always looking for a fight.
 
-    - Jimmy: Budget
-    version of Shiro.'
+    - Jimmy: Budget version of Shiro.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: eb3bc745999c25741be49cbdc16a3cab, type: 2}
   m_sharedMaterial: {fileID: -9023683877078503017, guid: eb3bc745999c25741be49cbdc16a3cab, type: 2}
@@ -1041,8 +1041,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -188}
-  m_SizeDelta: {x: 638.7837, y: 141.4133}
+  m_AnchoredPosition: {x: 0.0025024, y: -226}
+  m_SizeDelta: {x: 550.2159, y: 81.0263}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &549243151
 MonoBehaviour:
