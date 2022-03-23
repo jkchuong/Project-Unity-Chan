@@ -15,7 +15,7 @@ public class PointSystem : MonoBehaviour
     public float Distance { get; set; }
     public int Points { get; set; }
 
-    private void ResetSeconds() => secondsRunning = 0;
+    public void ResetSeconds() => secondsRunning = 0;
 
     private void Awake()
     {
